@@ -36,3 +36,15 @@ Route::POST('profile_update','App\Http\Controllers\Bus_company_profile_edit_Cont
 
 Route::get('/profile_page', [App\Http\Controllers\profile_Controller::class, 'show_profile'])->name('profile');
 Route::POST('profile_update','App\Http\Controllers\profile_Controller@profile_update');
+
+//Shopping Feature
+use App\Http\Controllers\ShoppingItemController;
+
+Route::middleware('auth')->group(function () {
+    Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
+    Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
+    Route::post('/shopping-items/{shoppingItem}/remove-from-cart', [ShoppingItemController::class, 'removeFromCart'])->name('shopping-items.remove-from-cart');
+});
+
+// Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
+Route::POST('addToCart','App\Http\Controllers\ShoppingItemController@addToCart');

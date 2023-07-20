@@ -41,29 +41,13 @@
                                     <label for="quantity">
                                         <H6>Quantity:</H6>
                                     </label>
-                                    <input name="item_quantity" type="number" class="form-control rounded-0" placeholder="Arbitrary" value="1" required="" min="1" max="100" step="1" pattern="\d*">
+                                    <input name="item_quantity" type="number" class="form-control rounded-0" placeholder="Arbitrary" value="5" required="" min="1" max="100" step="1" pattern="\d*">
                                 </div>
-                            </div>
-                            </td>
-                            <td>
-                                <!-- <option onkeyup="saveValue(this);" value="{{ $item->id }}"> Ticket-ID: {{ $item->id}} </option> -->
-                                <!-- <button value="{{ $item->id }}" type="button" class="btn btn-primary mr-2">Placeholder Button 1</button> -->
-                                <!-- <button type="button" class="btn btn-secondary">Placeholder Button 2</button> -->
-
-                                <div class="form-group">
-                                <label for="input-6">Food</label>
-                                <!-- <select required class="form-control form-control-rounded" name="food_id" id="input-6" placeholder="select">>
-                                    
-                                    <option onkeyup="saveValue(this);" value="{{ $item->item_id }}"> food-ID: {{ $item->item_id}} </option>
-                                    
-                                </select> -->
-
-
-                            </div>
+                          
                             </td>
                             <td>
                             <div class="form-group">
-                                    <button onclick="saveValue(this);" name="food_id" value="{{ $item->item_id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
+                                    <button onclick="saveValue(this);" name="food_id" value="{{ $item->item_id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>ADD</button>
                             </div>
                                 
                             </td>

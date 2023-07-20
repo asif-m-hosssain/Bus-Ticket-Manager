@@ -18,13 +18,13 @@ class ShoppingItemController extends Controller
 
     public function addToCart(request $req)
     {
-        //dd($req -> all(),"doesit work?");
+        dd($req -> all(),"doesit work?");
         
         $author_id = Auth::user()->id;
         $data = new CartItem;
         $data -> shopping_item_id = $req->input("food_id");
         $data-> user_id =$author_id;
-        // $data-> quantity = $req->input("item_quantity");
+        $data-> quantity = $req->input("item_quantity");
         $data -> save();
         return redirect()->back();
         // $user = Auth::user();

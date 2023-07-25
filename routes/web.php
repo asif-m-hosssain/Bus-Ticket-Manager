@@ -48,3 +48,9 @@ Route::middleware('auth')->group(function () {
 
 // Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
 Route::POST('addToCart','App\Http\Controllers\ShoppingItemController@addToCart');
+
+
+
+//adding items to menu
+Route::get('/add_food_to_menu', [App\Http\Controllers\AddShoppingItemController::class, 'showMenu'])->name('add_food_to_menu');
+Route::POST('addToMenu','App\Http\Controllers\AddShoppingItemController@addToMenu');

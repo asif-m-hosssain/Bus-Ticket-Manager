@@ -74,6 +74,12 @@
                                         </a>
                                     @endif
 
+                                    
+                                    @if (Auth::user()->role == "Customer")
+                                        <a class="dropdown-item" href="{{ route('buy_ticket') }}">
+                                            {{ __('Buy Ticket') }}
+                                        </a>
+                                    @endif
 
 
                                     @if (Auth::user()->role == "Customer")

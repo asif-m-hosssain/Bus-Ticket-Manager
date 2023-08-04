@@ -63,4 +63,12 @@ Route::get('/ranking', [App\Http\Controllers\ShowAllBusCompForRanking::class, 's
 Route::POST('rating_of_bus_comp','App\Http\Controllers\ShowAllBusCompForRanking@select_rating'); //pressing the ranking button
 
 
-Route::POST('submit_rating','App\Http\Controllers\ShowAllBusCompForRanking@give_rating'); //pressing the ranking button
+Route::POST('submit_rating','App\Http\Controllers\ShowAllBusCompForRanking@give_rating'); //pressing the submit button
+
+
+
+
+// showing all tickets
+Route::get('/buy_ticket', [App\Http\Controllers\BuyTicket::class, 'showTickets'])->name('buy_ticket');
+Route::POST('BuyingTheSelectedTicket','App\Http\Controllers\BuyTicket@select_seats'); //pressing the buying button 
+Route::POST('submit_seat','App\Http\Controllers\BuyTicket@submitted_seat'); //pressing the submit button

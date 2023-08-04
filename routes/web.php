@@ -54,3 +54,13 @@ Route::POST('addToCart','App\Http\Controllers\ShoppingItemController@addToCart')
 //adding items to menu
 Route::get('/add_food_to_menu', [App\Http\Controllers\AddShoppingItemController::class, 'showMenu'])->name('add_food_to_menu');
 Route::POST('addToMenu','App\Http\Controllers\AddShoppingItemController@addToMenu');
+
+//ends adding items to menu
+
+
+//ranking show
+Route::get('/ranking', [App\Http\Controllers\ShowAllBusCompForRanking::class, 'show'])->name('ranking');
+Route::POST('rating_of_bus_comp','App\Http\Controllers\ShowAllBusCompForRanking@select_rating'); //pressing the ranking button
+
+
+Route::POST('submit_rating','App\Http\Controllers\ShowAllBusCompForRanking@give_rating'); //pressing the ranking button

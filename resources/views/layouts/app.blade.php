@@ -66,6 +66,21 @@
                                         </a>
                                     @endif
                                     
+
+
+                                    @if (Auth::user()->role == "Brand")
+                                        <a class="dropdown-item" href="{{ route('add_food_to_menu') }}">
+                                            {{ __('Add Food to Menu') }}
+                                        </a>
+                                    @endif
+
+
+
+                                    @if (Auth::user()->role == "Customer")
+                                        <a class="dropdown-item" href="{{ route('ranking') }}">
+                                            {{ __('Rating and Review') }}
+                                        </a>
+                                    @endif
                                     <!-- <a class="dropdown-item" href="{{ route('brand') }}">
                                         {{ __('Ticketing') }}
                                     </a> -->

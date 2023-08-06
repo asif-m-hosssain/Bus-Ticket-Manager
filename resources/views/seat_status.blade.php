@@ -52,16 +52,26 @@
                             </div>
                             <hr>
                             
-                            <p>{{$Empty_seat}}</p>
+                            <p>total number of seats {{$Empty_seat}}</p>
+                            @for ($i = 1; $i < count($empty_seat); $i++)
+                                @if ($empty_seat[$i] == False)
+                                    <input type="checkbox" name="seat[]" value="{{ $i }}"> {{ $i }}<br>
+                                @else
+                                    <p>{{ $i }}</p>
+                                @endif
+                            @endfor
+
                             
+                            
+                            <input type="hidden" name="TicketID" value={{$TicketID}}>
                             <input type="hidden" name="tickets" value={{$Ticket}}>
                             <input type="hidden" name="b_comp_ticket_author_id" value={{$b_comp_ticket_author_id}}>
                             <input type="hidden" name="b_comp_ticket_author_name" value={{$b_comp_ticket_author_name}}>
                             <input type="hidden" name="empty_seat" value={{$Empty_seat}}>
-                            @for($i = 1; $i <= $Empty_seat ; $i++) 
+                            <!-- @for($i = 1; $i <= $Empty_seat ; $i++) 
                                 <input type="checkbox" name="seat[]" value={{$i}}> {{$i}}<br>
                             
-                            @endfor
+                            @endfor -->
 
                             <!-- <input type="checkbox" name="seat[]" value=1> 1<br>
                             <input type="checkbox" name="seat[]" value=2> 2 <br>

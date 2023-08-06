@@ -25,6 +25,35 @@ class BrandTicketPublishedController extends Controller
         $data -> b_comp_ticket_date = $req->input("Start_Time");
         $data -> b_comp_ticket_price = $req->input("Ticket_Price");
         $data -> b_comp_ticket_author_name = $authod_name;
+        
+        // seats
+
+
+        
+
+
+        $number_of_seats= $req->input("No_Seats");
+        $total_seats = array();
+        $empty_seats = array();
+        for ($i = 1; $i <= $number_of_seats; $i++) {
+            $total_seats[] = $i;
+            $empty_seats[$i] = False ;
+        }
+        // end of seats
+
+
+        // --
+        
+        $total_seats = serialize($total_seats);
+        $data -> all_seats = $total_seats;
+
+
+        $empty_seats = serialize($empty_seats);
+        $data -> empty_seats = $empty_seats;
+        // ==
+
+
+
         $data -> save();
         return redirect()->back();
     }

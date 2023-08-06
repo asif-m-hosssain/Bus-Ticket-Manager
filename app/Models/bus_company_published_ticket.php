@@ -9,4 +9,9 @@ class bus_company_published_ticket extends Model
 {
     protected $table="bus_company_published_ticket";
     public $timestamp = false;
+
+    protected $fillable = [
+        // Add other fillable fields if any
+        'empty_seats',
+    ];
 }

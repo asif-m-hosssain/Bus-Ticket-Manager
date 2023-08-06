@@ -14,6 +14,7 @@ use App\Models\CustomerBuyTicket;
 use App\Models\bus_company_published_ticket;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class BuyTicket extends Controller
 {
     public function showTickets()
@@ -22,7 +23,7 @@ class BuyTicket extends Controller
         $author_name = Auth::user()->name;
         $allRoutes = DB::select("select * from `bus_routes`");
         // $brandSpecifiedTicket = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
-        $tickets = bus_company_published_ticket::get();
+        $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
         // $brandSpecifiedExpiredTicketDate = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','<',Carbon::now())->get();
         // $brandSpecifiedExpiredTicketSeat = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_seat','=',0)->get();
         
@@ -54,9 +55,15 @@ class BuyTicket extends Controller
         $Ticket = bus_company_published_ticket::where('id', $TicketID)->first();
         $b_comp_ticket_author_name = $Ticket->b_comp_ticket_author_name;
         $b_comp_ticket_author_id = $Ticket->b_comp_ticket_author_id;
+
+        $empty_seat = $Ticket->empty_seats;
+        $empty_seat = unserialize($empty_seat);
+        // dd($req -> all(),$empty_seat);
+
+
         $Empty_seat = 36;
         if($userType=='Customer'){
-            return view('seat_status',compact('Ticket','TicketID','Empty_seat','b_comp_ticket_author_id','b_comp_ticket_author_name'));
+            return view('seat_status',compact('Ticket','TicketID','Empty_seat','b_comp_ticket_author_id','b_comp_ticket_author_name','empty_seat'));
         }
         else{
              
@@ -101,23 +108,54 @@ class BuyTicket extends Controller
         $data -> number_of_seats = $req-> empty_seat;
         $seats = $req-> seat;
         $seats = serialize($seats);
+        
+        
 
 
         $data -> seats = $seats;
         $data -> total_price = "100";
         
-        
-       
-        
         $data -> save();
+
+
+        $TicketID = $req-> TicketID;
+        $Ticket = bus_company_published_ticket::where('id', $TicketID)->first();
+        $all_empty_seats = $Ticket-> empty_seats;
+
+
+        $seats = unserialize($seats);
+        
+        $all_empty_seats = unserialize($all_empty_seats);
+        // dd($req -> all(), $all_empty_seats);
+        for ($i = 0; $i < count($seats); $i++) {
+            $all_empty_seats[$seats[$i]] = True;         
+            
+        }
+        // dd($req -> all(), $all_empty_seats);
+
+        if ($Ticket) {
+            
+           
+        
+            
+            $all_empty_seats = serialize($all_empty_seats);
+        
+            
+            $Ticket->update(['empty_seats' => $all_empty_seats]);
+        
+            
+        } else {
+            
+        }
+
+
+
+
+
+
         
         $allRoutes = DB::select("select * from `bus_routes`");
-        
-        $tickets = bus_company_published_ticket::get();
-        
-        
-        
-        
+        $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
         $userType = Auth::user()->role;
         
         

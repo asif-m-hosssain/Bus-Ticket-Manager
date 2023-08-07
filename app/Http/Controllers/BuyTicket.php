@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 class BuyTicket extends Controller
 {
-    public function showTickets()
+    public function showTickets(Request $req)
     {   
+
         $author_id = Auth::user()->id;
         $author_name = Auth::user()->name;
         $allRoutes = DB::select("select * from `bus_routes`");
@@ -26,8 +27,18 @@ class BuyTicket extends Controller
         $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
         // $brandSpecifiedExpiredTicketDate = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','<',Carbon::now())->get();
         // $brandSpecifiedExpiredTicketSeat = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_seat','=',0)->get();
+        // dd($req -> all(),"doesit work?");
+
         
-        
+        if($req){
+
+            $from = $req-> Start_RouteName;
+            $to = $req-> Destination_RouteName;
+            $sate = $req-> Start_Time;
+            $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_from',$from)->where('b_comp_ticket_to',$to)->where('b_comp_ticket_seat','>',0)->get();
+        }else{
+            $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
+        }
         
         $userType = Auth::user()->role;
         

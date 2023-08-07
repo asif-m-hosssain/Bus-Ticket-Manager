@@ -39,6 +39,67 @@
         <div class="content-wrapper">
             <div class="container-fluid">
                 <!-- search bar -->
+                <form action="buy_ticket" method="POST">
+                    @csrf
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <H4>Ticket</H4>
+                            </div>
+                            <hr>
+                            <div class="col-xxs-12 col-xs-6 mt">
+                                <div class="input-field">
+                                    <label for="from">
+                                        <H6>From:</H6>
+                                    </label>
+                                    <!-- <input type="text" class="form-control" id="from-place" placeholder="Dhaka, Bangladesh"/> -->
+                                    <select required class="form-control form-control-rounded" name="Start_RouteName" id="input-6" placeholder="select">>
+                                        @foreach($allRoutes as $item)
+                                        <option onkeyup="saveValue(this);" value="{{ $item->route_name }}"> {{ $item->route_name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-xxs-12 col-xs-6 mt">
+                                <div class="input-field">
+                                    <label for="from">
+                                        <H6>To:</H6>
+                                    </label>
+                                    <select required class="form-control form-control-rounded" name="Destination_RouteName" id="input-6" placeholder="select">>
+                                        @foreach($allRoutes as $item)
+                                        <option onkeyup="saveValue(this);" value="{{ $item->route_name }}"> {{ $item->route_name }} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- <div class="col-xxs-12 col-xs-6 mt">
+                                <div class="input-field">
+                                    <label for="quantity">
+                                        <H6>Seats:</H6>
+                                    </label>
+                                    <input name="No_Seats" type="number" class="form-control rounded-0" placeholder="Seats" required="" min="0" max="41" step="1" pattern="\d*">
+                                </div>
+                            </div> -->
+                            <hr>
+                            <div class="col-xxs-12 col-xs-6 mt">
+                                <div class="input-field">
+                                    <label for="quantity">
+                                        <H6>Time:</H6>
+                                    </label>
+                                    <input class="form-control rounded-0" type="datetime-local" id="starttime" name="Start_Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime-local')">
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            <hr>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 
                 <!-- search bar ends -->
                 
@@ -64,7 +125,7 @@
                             <tbody>
                                 @foreach($tickets as $item)
                                     <tr>
-                                        <td> {{ $item->id}} </td>
+                                        <td> {{ $item->b_comp_ticket_from}} </td>
                                         <td> {{ $item->b_comp_ticket_from}} </td>
                                         <td> {{ $item->b_comp_ticket_to}} </td>
                                         <td> {{ $item->b_comp_ticket_date}} </td>

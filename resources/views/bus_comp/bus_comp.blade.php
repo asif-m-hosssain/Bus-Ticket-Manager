@@ -176,7 +176,7 @@
                                     <label for="quantity">
                                         <H6>Seats:</H6>
                                     </label>
-                                    <input name="No_Seats" type="number" class="form-control rounded-0" placeholder="Seats" required="" min="0" max="41" step="1" pattern="\d*">
+                                    <input name="No_Seats" type="number" class="form-control rounded-0" placeholder="Seats" required="" min="0" max="40" step="1" pattern="\d*">
                                 </div>
                             </div>
                             <hr>

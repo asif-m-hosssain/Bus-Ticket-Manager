@@ -53,13 +53,85 @@
                             <hr>
                             
                             <p>total number of seats {{$Empty_seat}}</p>
-                            @for ($i = 1; $i < count($empty_seat); $i++)
+                            <!-- @for ($i = 1; $i < count($empty_seat); $i=$i+2)
                                 @if ($empty_seat[$i] == False)
                                     <input type="checkbox" name="seat[]" value="{{ $i }}"> {{ $i }}<br>
                                 @else
                                     <p>{{ $i }}</p>
                                 @endif
                             @endfor
+
+
+                            @for ($i = 2; $i < count($empty_seat); $i=$i+2)
+                                @if ($empty_seat[$i] == False)
+                                    <input type="checkbox" name="seat[]" value="{{ $i }}"> {{ $i }}<br>
+                                @else
+                                    <p>{{ $i }}</p>
+                                @endif
+                            @endfor -->
+
+
+
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>Coloumn A</th>
+                                        <th>Coloumn B</th>
+                                        <th>Coloumn C</th>
+                                        <th>Coloumn D</th>
+                                    </tr>
+                                </thead>
+                        
+                            
+                                <!-- Fectching item  information -->
+                                <tbody>
+
+                                    @for ($i = 1; $i < count($empty_seat); $i=$i+4)
+
+                                        <tr>
+
+                                            <td class="text-center">
+                                                @if ($empty_seat[$i] == False)
+                                                    <input type="checkbox" name="seat[]" value="{{ $i }}"> {{ $i }}<br>
+                                                @else
+                                                    <p>{{ $i }}</p>
+                                                @endif
+                                            </td>
+
+                                            <td class="text-center">
+                                                @if ($empty_seat[$i] == False)
+                                                    <input type="checkbox" name="seat[]" value="{{ $i+1 }}"> {{ $i+1 }}<br>
+                                                @else
+                                                    <p>{{ $i+1 }}</p>
+                                                @endif
+                                            </td>
+
+                                            <td class="text-center">
+                                                @if ($empty_seat[$i] == False)
+                                                    <input type="checkbox" name="seat[]" value="{{ $i+2 }}"> {{ $i+2 }}<br>
+                                                @else
+                                                    <p>{{ $i+2 }}</p>
+                                                @endif
+                                            </td>
+
+                                            <td class="text-center">
+                                                @if ($empty_seat[$i] == False)
+                                                    <input type="checkbox" name="seat[]" value="{{ $i+3 }}"> {{ $i+3 }}<br>
+                                                @else
+                                                    <p>{{ $i+3 }}</p>
+                                                @endif
+                                            </td>
+
+                                           
+                                            
+                                        </tr>
+                                        
+                                    @endfor
+
+                                    
+                                </tbody>
+
+                            </table>
 
                             
                             

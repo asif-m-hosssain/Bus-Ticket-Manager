@@ -3,62 +3,72 @@
 @section('styles')
     <style>
         body {
-            background-color: lightblue;
+            background-color: blue;
         }
+
     </style>
 @endsection
 
 @section('content')
 <script src="js/modernizr-2.6.2.min.js"></script>
-    <h1 class="text-center">Shopping Items</h1>
-    <form action="addToCart" method="POST">    
+    <h1 class="text-center">FOOD CHART</h1>
+    <h6 class="text-center">Catering booking available only till the day before departure</h6>
+    <form action="{{ route('shopping-items.addToCart') }}" method="POST">    
         @csrf   
         <div class="d-flex justify-content-center">
             <table class="table table-bordered table-striped">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Add/Drop to Cart</th>
+                    <!-- column headings -->
+                    <tr class="text-center"> 
+                        <th>ID</th>
+                        <th>Item Name</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
                     </tr>
                 </thead>
+                
+                <!--column values -->  
                 <tbody>
                     @foreach($shoppingItems as $item)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->price }}</td>
-                            <td>
+                            <td class="text-center">{{ $item->item_id }}</td>  
+                            <td class="text-center">{{ $item->name }}</td> 
+                            <td class="text-center">{{ $item->price }} TK</td> 
                             
-                            <!-- <div class="input-field">
-                                <input name="Ticket_Price" type="number" class="form-control rounded-0" placeholder="BDT" value="1000" required="" min="200" max="10000" step="1" pattern="\d*">
-                                <input name="item_quantity" type="number" class="form-control rounded-0" placeholder="1000" value="1000" required="" min="200" max="10000" step="1" pattern="\d*">
-                                <input name="item_quantity" type="number" class="form-control rounded-0" placeholder="1" require="" min="1" max="10" step="1" pattern="\d*">
-                            </div> -->
-
-                            
-                            <div class="col-xxs-12 col-xs-6 mt">
-                                <div class="input-field">
-                                    <label for="quantity">
-                                        <H6>Quantity:</H6>
-                                    </label>
-                                    <input name="item_quantity" type="number" class="form-control rounded-0" placeholder="Arbitrary" value="5" required="" min="1" max="100" step="1" pattern="\d*">
+                            <!-- Quantity -->  
+                            <td class="text-center">      
+                                <div class="col-xxs-12 col-xs-6 mt">
+                                    <div class="input-field text-center">
+                                        <!--Passing quantity values for the choosen food as nested array-->
+                                        <input name="item_quantity[{{ $item->item_id }}]" type="number" class="form-control rounded-0" placeholder="Enter Quantity " value="0" required min="0" max="100" step="1" pattern="\d*">
+                                    </div>
                                 </div>
-                          
                             </td>
-                            <td>
-                            <div class="form-group">
-                                    <button onclick="saveValue(this);" name="food_id" value="{{ $item->item_id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>ADD</button>
-                            </div>
-                                
-                            </td>
+                            
+                            <!-- Hidden input field to store the food ID -->
+                            <input type="hidden" name="food_id[]" value="{{ $item->item_id }}">
+
+                            <!-- ADD Button -->
+                            <!-- <td class="text-center"> 
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-sm rounded-pill"><i class="icon-lock"></i>ADD</button>
+                                </div>           
+                            </td> -->
                         </tr>
                     @endforeach
                 </tbody>
                 
             </table>
-            <!-- <div class="form-group">
-                    <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
-            </div> -->
         </div>
+
+
+        <!--"ADD" button at the bottom -->
+        <div class="d-flex justify-content-center mt-4">
+            <form action="{{ route('shopping-items.addToCart') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success btn-lg rounded-pill"><i class="icon-lock"></i>ADD TO CART</button>
+            </form>
+    </div>
+
     </form>
 @endsection

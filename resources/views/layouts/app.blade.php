@@ -103,11 +103,27 @@
                                     @endif
 
 
+                                    @if (Auth::user()->role == "Admin")
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Register Bus') }}
+                                    </a>
+                                    @endif
 
 
+                                    @if (Auth::user()->role == "Customer")
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         {{ __('Profile') }}
                                     </a>
+                                    @endif
+
+
+                                    @if (Auth::user()->role == "Brand")
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
+                                    @endif                                    
+
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

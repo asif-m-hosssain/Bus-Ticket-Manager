@@ -59,6 +59,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
     Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
     Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
+
+
+    // Route::get('/customersearch', [App\Http\Controllers\HomeController::class, 'customersearch'])->name('customersearch'); //parom
+    // Route::post('/bookticket', [App\Http\Controllers\HomeController::class, 'bookTicket'])->name('bookticket'); //parom
+    Route::POST('/brand-register', [App\Http\Controllers\BController::class, 'store'])->name('brand_register')->middleware('auth'); //parom
+
 });
 
 

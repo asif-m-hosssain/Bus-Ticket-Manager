@@ -57,8 +57,11 @@ class profile_Controller extends Controller
         // {
         //     $totalrevenue+=$item->totalprice;
         // }
+        if($userType == 'Admin'){
+            return view('admin_dashboard',compact('id','name','email','updated_at','created_at','role'));
+        }
         
-        if($userType=='Brand' || $userType == 'Admin'){
+        if($userType=='Brand'){
             return view('bus_profile',compact('id','name','email','updated_at','created_at','role'));
         }
         elseif($userType=='Customer'){

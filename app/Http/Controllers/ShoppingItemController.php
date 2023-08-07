@@ -24,7 +24,7 @@ class ShoppingItemController extends Controller
         
         //Get the quantities from the form input
         $quantities = $request->input('item_quantity');
-        
+        // dd($request -> all(),$quantities);
         //Loop through each quantity and update the cart items accordingly
         foreach ($quantities as $itemId => $quantity) {
             //Check if the quantity is greater than 0 to avoid adding items with zero quantity

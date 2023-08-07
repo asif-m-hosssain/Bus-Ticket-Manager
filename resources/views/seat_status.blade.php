@@ -99,7 +99,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                @if ($empty_seat[$i] == False)
+                                                @if ($empty_seat[$i+1] == False)
                                                     <input type="checkbox" name="seat[]" value="{{ $i+1 }}"> {{ $i+1 }}<br>
                                                 @else
                                                     <p>{{ $i+1 }}</p>
@@ -107,7 +107,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                @if ($empty_seat[$i] == False)
+                                                @if ($empty_seat[$i+2] == False)
                                                     <input type="checkbox" name="seat[]" value="{{ $i+2 }}"> {{ $i+2 }}<br>
                                                 @else
                                                     <p>{{ $i+2 }}</p>
@@ -115,7 +115,7 @@
                                             </td>
 
                                             <td class="text-center">
-                                                @if ($empty_seat[$i] == False)
+                                                @if ($empty_seat[$i+3] == False)
                                                     <input type="checkbox" name="seat[]" value="{{ $i+3 }}"> {{ $i+3 }}<br>
                                                 @else
                                                     <p>{{ $i+3 }}</p>

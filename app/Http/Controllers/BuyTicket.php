@@ -87,7 +87,7 @@ class BuyTicket extends Controller
     public function submitted_seat(Request $req)
     {
         
-        // dd($req -> all());
+        dd($req -> all());
         $seats = $req-> seat;
         // foreach($seats as $item){
 

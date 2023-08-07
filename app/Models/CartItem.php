@@ -9,4 +9,9 @@ class CartItem extends Model
 {
     protected $table="cart_items";
     // use HasFactory;
+
+    public function shoppingItem()
+    {
+        return $this->belongsTo(ShoppingItem::class, 'shopping_item_id');
+    }
 }

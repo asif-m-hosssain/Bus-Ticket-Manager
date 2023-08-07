@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'EasyGo') }}</title>
+    <!-- <title>{{ config('app.name', 'EasyGo') }}</title> -->
+    <title>EasyGO</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -90,6 +91,19 @@
                                     <!-- <a class="dropdown-item" href="{{ route('brand') }}">
                                         {{ __('Ticketing') }}
                                     </a> -->
+                                    @if (Auth::user()->role == "Customer")
+                                    <a class="dropdown-item" href="{{ route('shopping-items.index') }}">
+                                        {{ __('Food') }}
+                                    </a>
+                                    @endif
+                                    @if (Auth::user()->role == "Customer")
+                                    <a class="dropdown-item" href="{{ route('shopping-items.cart') }}">
+                                        {{ __('Cart') }}
+                                    </a>
+                                    @endif
+
+
+
 
                                     <a class="dropdown-item" href="{{ route('profile') }}">
                                         {{ __('Profile') }}

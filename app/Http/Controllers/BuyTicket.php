@@ -37,7 +37,7 @@ class BuyTicket extends Controller
             $sate = $req-> Start_Time;
             $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_from',$from)->where('b_comp_ticket_to',$to)->where('b_comp_ticket_seat','>',0)->get();
         }else{
-            $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
+            // $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
         }
         
         $userType = Auth::user()->role;

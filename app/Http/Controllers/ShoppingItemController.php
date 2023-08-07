@@ -16,35 +16,41 @@ class ShoppingItemController extends Controller
         return view('shopping-items.index', compact('shoppingItems'));
     }
 
-    public function addToCart(request $req)
+    // Add to cart function:
+    // This function will help in adding the showcased items to the shopping cart
+    public function addToCart(Request $request)
     {
-        dd($req -> all(),"doesit work?");
-        
         $author_id = Auth::user()->id;
-        $data = new CartItem;
-        $data -> shopping_item_id = $req->input("food_id");
-        $data-> user_id =$author_id;
-        $data-> quantity = $req->input("item_quantity");
-        $data -> save();
-        return redirect()->back();
-        // $user = Auth::user();
-    
-        // // Attach the shopping item to the user's cart with quantity 1
-        // $user->cartItems()->attach($shoppingItem, ['quantity' => 1]);
-
-        // return redirect()->back()->with('success', 'Item added to cart successfully.');
-    }
-    
-    public function removeFromCart(ShoppingItem $shoppingItem)
-    {
-        $user = Auth::user();
         
-        // Detach the shopping item from the user's cart
-        $user->cartItems()->detach($shoppingItem);
+        //Get the quantities from the form input
+        $quantities = $request->input('item_quantity');
+        
+        //Loop through each quantity and update the cart items accordingly
+        foreach ($quantities as $itemId => $quantity) {
+            //Check if the quantity is greater than 0 to avoid adding items with zero quantity
+            if ($quantity > 0) {
+                
+                //Find the cart item for the current food item and user
+                $cartItem = CartItem::where('user_id', $author_id)
+                    ->where('shopping_item_id', $itemId)
+                    ->first();
 
-        return redirect()->back()->with('success', 'Item removed from cart successfully.');
+                //If a cart item exists, update the quantity
+                if ($cartItem) {
+                    $cartItem->quantity = $quantity;
+                    $cartItem->save();
+                } else {
+                    //If a cart item doesn't exist, creating a new one
+                    $cartItem = new CartItem();
+                    $cartItem->user_id = $author_id;
+                    $cartItem->shopping_item_id = $itemId;
+                    $cartItem->quantity = $quantity;
+                    $cartItem->save();
+                }
+            }
+        }
+        
+        return redirect()->back()->with('success', 'Cart updated successfully.');
     }
 
-    
 }
-

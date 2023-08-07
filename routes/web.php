@@ -38,17 +38,28 @@ Route::get('/profile_page', [App\Http\Controllers\profile_Controller::class, 'sh
 Route::POST('profile_update','App\Http\Controllers\profile_Controller@profile_update');
 
 //Shopping Feature
+// use App\Http\Controllers\ShoppingItemController;
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
+//     Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
+//     Route::post('/shopping-items/{shoppingItem}/remove-from-cart', [ShoppingItemController::class, 'removeFromCart'])->name('shopping-items.remove-from-cart');
+// });
+
+// // Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
+// Route::POST('addToCart','App\Http\Controllers\ShoppingItemController@addToCart');
+
+
+
+//Shopping Feature
 use App\Http\Controllers\ShoppingItemController;
+use App\Http\Controllers\CartController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
-    Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
-    Route::post('/shopping-items/{shoppingItem}/remove-from-cart', [ShoppingItemController::class, 'removeFromCart'])->name('shopping-items.remove-from-cart');
+    Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
+    Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
 });
-
-// Route::post('/shopping-items/{shoppingItem}/add-to-cart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.add-to-cart');
-Route::POST('addToCart','App\Http\Controllers\ShoppingItemController@addToCart');
-
 
 
 //adding items to menu

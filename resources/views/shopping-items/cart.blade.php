@@ -3,10 +3,69 @@
 @section('content')
     <h1 class="text-center">CHECKOUT</h1>
     <h4 class="text-center">Thank you for using EasyGO</h4>
-    <div class="d-flex justify-content-center">
+    <div >
     
-    <!-- Main table -->    
-    <table class="table table-bordered table-striped">
+    <!-- table to show tickets running -->
+
+
+
+    
+        <form action="/shopping-items" method="POST">
+            @csrf
+            <div class="d-flex justify-content-center">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Ticket ID</th>
+                            <th>Customer Name</th>
+                            <th>Bus Company ID</th>
+                            <th>Bus Company Name</th>
+                            <th>Seat Count</th>
+                            <th>Seat Numbers</th>
+                        </tr>
+                    </thead>
+
+                    
+                    <!-- Fectching item  information -->
+                    <tbody>
+
+                        @foreach($tickets as $item)
+                            <tr>
+                                <td class="text-center">{{ $item['TicketID'] }}</td>
+                                <td class="text-center">{{ $item['customer_name'] }} </td>
+                                <td class="text-center">{{ $item['bus_comp_id'] }}</td>
+                                <td class="text-center">{{ $item['bus_comp_name'] }} </td>
+                                <td class="text-center">{{ count(unserialize($item['seats'])) }}</td>
+                                <!-- <td class="text-center">{{ $item['seats'] }}</td> -->
+                                <td>
+                                    @foreach( unserialize($item['seats']) as $i)
+                                        <p class="text-center"> {{ $i }}</p>
+                                        
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                            <input type="hidden" name="bus_comp_name" value="{{ $item -> bus_comp_name}}" >
+                                            <input type="hidden" name="bus_comp_id" value="{{ $item -> bus_comp_id}}" >
+                                            <button onclick="saveValue(this);" name="ticket_id" value="{{ $item->TicketID }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Buy Foods</button>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+            </div>
+        </form>
+        
+
+        
+    <!-- table to show tickets running ends-->
+        <br>
+        <p>different table</p>
+        <!-- Main table -->    
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr class="text-center">
                     <th>Item Name</th>
@@ -15,8 +74,8 @@
                     <th>Total Price</th>
                 </tr>
             </thead>
-    
-           
+
+            
             <!-- Fectching item  information -->
             <tbody>
 

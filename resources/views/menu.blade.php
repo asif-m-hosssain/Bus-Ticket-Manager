@@ -55,8 +55,10 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
+                                            <th>Ticket ID</th>
                                             <th>Name</th>
                                             <th>Price</th>
+                                            
                                             
                                         </tr>
                                     </thead>
@@ -65,9 +67,12 @@
                                         
                                         @foreach($allshoppingitems as $item)
                                             <tr>
+                                                
                                                 <td> {{ $item->item_id}} </td>
+                                                <td> {{ $item->ticket_id}} </td>
                                                 <td> {{ $item->name}} </td>
                                                 <td> {{ $item->price}} </td>
+
                                                 
                                             </tr>
                                         @endforeach
@@ -97,6 +102,15 @@
                             <hr>
                             
                             <hr>
+                            <div class="form-group">
+                                <label for="input-6">ticket</label>
+                                <select required class="form-control form-control-rounded" name="ticket_id" id="input-6" placeholder="select">>
+                                    @foreach($brandSpecifiedTicket as $item)
+                                    <option onkeyup="saveValue(this);" value="{{ $item->id }}"> Ticket-ID: {{ $item->id}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="col-xxs-12 col-xs-6 mt">
                                 <div class="input-field">
                                     <label for="text">
@@ -117,6 +131,8 @@
                                     <input name="item_Price" type="number" class="form-control rounded-0" placeholder="BDT" value="10" required="" min="1" max="10000" step="1" pattern="\d*">
                                 </div>
                             </div>
+                            <hr>
+                            
                             <hr>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>

@@ -57,6 +57,7 @@ use App\Http\Controllers\CartController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
+    Route::post('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index_post');//pranta
     Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
     Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
 
@@ -70,6 +71,7 @@ Route::middleware('auth')->group(function () {
 
 //adding items to menu
 Route::get('/add_food_to_menu', [App\Http\Controllers\AddShoppingItemController::class, 'showMenu'])->name('add_food_to_menu');
+
 Route::POST('addToMenu','App\Http\Controllers\AddShoppingItemController@addToMenu');
 
 //ends adding items to menu

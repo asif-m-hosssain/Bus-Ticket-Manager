@@ -21,6 +21,7 @@
                     <!-- column headings -->
                     <tr class="text-center"> 
                         <th>ID</th>
+                        <th>Ticket ID</th>
                         <th>Item Name</th>
                         <th>Unit Price</th>
                         <th>Quantity</th>
@@ -32,6 +33,7 @@
                     @foreach($shoppingItems as $item)
                         <tr>
                             <td class="text-center">{{ $item->item_id }}</td>  
+                            <td class="text-center">{{ $item->ticket_id }}</td>  
                             <td class="text-center">{{ $item->name }}</td> 
                             <td class="text-center">{{ $item->price }} TK</td> 
                             

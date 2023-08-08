@@ -39,7 +39,7 @@ class bus_company_profile_edit_Controller extends Controller
         $updated_at = Auth::user()->updated_at;
         $all_roles = ['Brand', "Customer"];
         
-        if($userType=='Brand' || $userType == 'Admin'){
+        if($userType=='Brand' || $userType == 'Customer'){
             return view('bus_company_profile_edit',compact('id','name','email','updated_at','created_at','role','all_roles'));
         }
         else{

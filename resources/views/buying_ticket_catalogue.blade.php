@@ -125,7 +125,7 @@
                             <tbody>
                                 @foreach($tickets as $item)
                                     <tr>
-                                        <td> {{ $item->b_comp_ticket_from}} </td>
+                                        <td> {{ $item->id}} </td>
                                         <td> {{ $item->b_comp_ticket_from}} </td>
                                         <td> {{ $item->b_comp_ticket_to}} </td>
                                         <td> {{ $item->b_comp_ticket_date}} </td>

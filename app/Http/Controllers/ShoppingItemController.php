@@ -9,10 +9,16 @@ use Auth;
 
 class ShoppingItemController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $shoppingItems = ShoppingItem::all();
-
+        // dd($request -> all());
+        // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton
+        $ticket_id = $request-> ticket_id;
+        $bus_comp_name = $request-> bus_comp_name;
+        $bus_comp_id = $request-> bus_comp_id;
+        // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton ends
+        $shoppingItems = ShoppingItem::where('ticket_id', $ticket_id)->get();
+        // dd($request -> all(), $shoppingItems);
         return view('shopping-items.index', compact('shoppingItems'));
     }
 

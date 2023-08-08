@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use App\Models\CartItem;
 use Auth;
 
+// to show tickets need this
+use Carbon\Carbon;
+use App\Models\CustomerBuyTicket;
+// to show tickets need this ends 
+
 class CartController extends Controller
 {
     //This function will help in fetching the items ordered by the 
@@ -40,8 +45,14 @@ class CartController extends Controller
             $detailedCartItems[] = $detailedCartItem;
         }
 
+        // ticket details
+        $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        // dd($tickets);
+        // ticket details ends
+        
+
         //Pass the detailed cart items to the cart view
-        return view('shopping-items.cart', compact('detailedCartItems'));
+        return view('shopping-items.cart', compact('detailedCartItems','tickets'));
     }
 }
 

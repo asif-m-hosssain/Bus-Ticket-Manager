@@ -87,7 +87,7 @@ class BuyTicket extends Controller
     public function submitted_seat(Request $req)
     {
         
-        dd($req -> all());
+        // dd($req -> all());
         $seats = $req-> seat;
         // foreach($seats as $item){
 
@@ -112,8 +112,8 @@ class BuyTicket extends Controller
         // $data -> bus_comp_name = $req-> $tickets -> b_comp_ticket_author_name;
 
 
-
-
+        
+        $data -> TicketID = $req -> TicketID;
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
         $data -> bus_comp_name = $req -> b_comp_ticket_author_name;
         $data -> number_of_seats = $req-> empty_seat;

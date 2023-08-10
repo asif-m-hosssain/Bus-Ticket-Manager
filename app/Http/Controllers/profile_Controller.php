@@ -38,6 +38,22 @@ class profile_Controller extends Controller
 
     }
 
+    public function edit_profile()
+    {   
+        $user = Auth::user();
+        $userType = $user->role;
+        $all_roles = ["Customer","Brand"];
+        if($userType=='Brand'){
+            return view('profile_edit', compact('user','all_roles'));
+        } elseif($userType=='Customer'){
+            return view('profile_edit', compact('user','all_roles'));
+        } else {
+            return redirect()->back();
+        }
+    
+
+    }
+
     public function profile_update(Request $req)
     {
         $user = Auth::user();

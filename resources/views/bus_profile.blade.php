@@ -61,7 +61,7 @@
                 <div class="row mt-3">
                     <div class="col-12 col-lg-12">
                         <button class="btn btn-outline-primary">
-                            <a href="{{ route('bus_company_profile_edit') }}" style="text-decoration: none; color: inherit;">
+                            <a href="{{ route('profile_edit') }}" style="text-decoration: none; color: inherit;">
                                 <i class="fa fa-pencil"></i> Edit Profile
                             </a>
                         </button>

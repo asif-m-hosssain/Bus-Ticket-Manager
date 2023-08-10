@@ -31,9 +31,13 @@ Route::POST('BrandDeleteTicketSubmit','App\Http\Controllers\BrandTicketPublished
 Route::get('/edit_ticket', [App\Http\Controllers\EditTicketsController::class, 'funcEditTickets'])->name('edit_ticket');
 Route::POST('funcSubmitEditedTickets','App\Http\Controllers\EditTicketsController@funcSubmitEditedTickets');
 
-Route::get('bus_company_profile_edit', [App\Http\Controllers\Bus_company_profile_edit_Controller::class, 'show_profile'])->name('bus_company_profile_edit');
-Route::POST('profile_update','App\Http\Controllers\Bus_company_profile_edit_Controller@profile_update');
 
+// profile for bus company
+// Route::get('bus_company_profile_edit', [App\Http\Controllers\Bus_company_profile_edit_Controller::class, 'show_profile'])->name('bus_company_profile_edit');
+// Route::POST('profile_update','App\Http\Controllers\Bus_company_profile_edit_Controller@profile_update');
+
+// profile for customer
+Route::get('profile_edit', [App\Http\Controllers\profile_Controller::class, 'edit_profile'])->name('profile_edit');
 Route::get('/profile_page', [App\Http\Controllers\profile_Controller::class, 'show_profile'])->name('profile');
 Route::POST('profile_update','App\Http\Controllers\profile_Controller@profile_update');
 

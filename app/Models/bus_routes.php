@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class bus_routes extends Model
 {
-    protected $table="all_routes";
-    public $timestamp = false;
+    protected $table="bus_routes";
+    public $timestamps = false;
 }

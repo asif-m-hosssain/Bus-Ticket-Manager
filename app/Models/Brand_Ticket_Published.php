@@ -35,6 +35,20 @@ class Brand_Ticket_Published extends Model
             ->get();
     }
 
+    public static function getBrandSpecifiedExpiredTicketDate($authorId)
+    {
+        return self::where('b_comp_ticket_author_id', $authorId)
+        ->where('b_comp_ticket_date', '<', Carbon::now())
+        ->get();
+    }
+
+    public static function getbrandSpecifiedExpiredTicketSeat($authorId)
+    {
+        return self::where('b_comp_ticket_author_id', $authorId)
+        ->where('b_comp_ticket_seat', '=', 0)
+        ->get();
+    }
+
 
     public static function createTicket(array $ticketData)
     {

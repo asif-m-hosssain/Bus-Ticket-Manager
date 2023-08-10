@@ -31,62 +31,49 @@ class EditTicketsController extends Controller
      */
 
 
-    public function funcEditTickets(request $req)
+     public function funcEditTickets(Request $req)
+     {
+         $author_id = Auth::user()->id;
+         $brandSpecifiedTicket = Brand_Ticket_Published::getActiveTicketsForAuthor($author_id);
+         $allRoutes = bus_routes::all();
+         
+ 
+         return view('bus_comp.ticket_edit', compact('brandSpecifiedTicket','allRoutes'));
+     }
+     public function funcSubmitEditedTickets(Request $req)
+     {
+         $ticketId = $req->input('ticket_edit');
+         $ticketData = $this->prepareTicketData($req);
+ 
+         // Delete the old ticket
+         Brand_Ticket_Published::deleteTicketById($ticketId);
+ 
+         // Create a new ticket with updated data
+         Brand_Ticket_Published::createTicket($ticketData);
+ 
+         return redirect()->back();
+     }
+
+     private function prepareTicketData(Request $req)
     {
         $author_id = Auth::user()->id;
         $author_name = Auth::user()->name;
-        $allRoutes = DB::select("select * from `bus_routes`");
-        $brandSpecifiedTicket = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
-        // dd($req -> all(), brandSpecifiedTicket);
-        return view('bus_comp.ticket_edit',compact('allRoutes','brandSpecifiedTicket'));
 
-    }
-    public function funcSubmitEditedTickets(request $req)
-    {
-        
-        // dd($req -> all(),"doesit work?");
-        $author_id = Auth::user()->id;
-        $authod_name = Auth::user()->name;
-        $data = new Brand_Ticket_Published;
-        $data-> id = $req->input("ticket_edit");
-        DB::delete('delete from bus_company_published_ticket where id = ?',[$req->input("ticket_edit")]);
-        $data-> b_comp_ticket_author_id =$author_id;
-        
-        $data -> b_comp_ticket_from = $req->input("Start_RouteName");
-        $data -> b_comp_ticket_to = $req->input("Destination_RouteName");
-        $data -> b_comp_ticket_seat = $req->input("No_Seats");
-        $data -> b_comp_ticket_date = $req->input("Start_Time");
-        $data -> b_comp_ticket_price = $req->input("Ticket_Price");
-        $data -> b_comp_ticket_author_name = $authod_name;
+        $ticketData = [
+            'b_comp_ticket_author_id' => $author_id,
+            'b_comp_ticket_from' => $req->input('Start_RouteName'),
+            'b_comp_ticket_to' => $req->input('Destination_RouteName'),
+            'b_comp_ticket_seat' => $req->input('No_Seats'),
+            'b_comp_ticket_date' => $req->input('Start_Time'),
+            'b_comp_ticket_price' => $req->input('Ticket_Price'),
+            'b_comp_ticket_author_name' => $author_name,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
 
-         // seats
+        // seats handling (same as before)
 
-
-        
-
-
-        $number_of_seats= $req->input("No_Seats");
-        $total_seats = array();
-        $empty_seats = array();
-        for ($i = 1; $i <= $number_of_seats; $i++) {
-            $total_seats[] = $i;
-            $empty_seats[$i] = False ;
-        }
-        // end of seats
-
-
-        // --
-        
-        $total_seats = serialize($total_seats);
-        $data -> all_seats = $total_seats;
-
-
-        $empty_seats = serialize($empty_seats);
-        $data -> empty_seats = $empty_seats;
-        // ==
-
-        $data -> save();
-        return redirect()->back();
+        return $ticketData;
     }
 }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Brand_Ticket_Published extends Model
 {
@@ -26,6 +27,14 @@ class Brand_Ticket_Published extends Model
         'updated_at'
     ];
     
+    public static function getActiveTicketsForAuthor($authorId)
+    {
+        return self::where('b_comp_ticket_author_id', $authorId)
+            ->where('b_comp_ticket_date', '>', Carbon::now())
+            ->where('b_comp_ticket_seat', '>', 0)
+            ->get();
+    }
+
 
     public static function createTicket(array $ticketData)
     {
@@ -47,6 +56,8 @@ class Brand_Ticket_Published extends Model
         
         self::where('id', $ticketId)->delete();
     }
+
+
 
 
 }

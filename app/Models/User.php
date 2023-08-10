@@ -42,4 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public static function getAllBusComp($role)
+    {
+        return self::where('role', $role)
+            ->get();
+    }
+    
 }

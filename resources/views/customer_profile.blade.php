@@ -58,9 +58,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{ $id }}</td>
-                                            <td>{{ $name }}</td>
-                                            <td>{{ $email }}</td>
+                                            <td>{{ $user ->id }}</td>
+                                            <td>{{ $user ->name }}</td>
+                                            <td>{{ $user ->email }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

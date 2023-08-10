@@ -36,13 +36,14 @@ class BrandTicketPublishedController extends Controller
     }
 
 
-    public function BrandDeleteTicketSubmit(request $req)
+    public function BrandDeleteTicketSubmit(Request $req)
     {
+        $ticketId = $req->input('ticket_delete');
         
+        // Call the model to delete the ticket
+        Brand_Ticket_Published::deleteTicketById($ticketId);
 
-        DB::delete('delete from bus_company_published_ticket where id = ?',[$req->input("ticket_delete")]);
         return redirect()->back();
-
     }
 
     

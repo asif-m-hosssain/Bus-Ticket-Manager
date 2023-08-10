@@ -39,4 +39,14 @@ class Brand_Ticket_Published extends Model
     {
         return serialize($seats);
     }
+
+
+    // Delete ticket by ID
+    public static function deleteTicketById($ticketId)
+    {
+        
+        self::where('id', $ticketId)->delete();
+    }
+
+
 }

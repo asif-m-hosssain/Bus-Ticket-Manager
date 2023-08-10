@@ -71,6 +71,36 @@ class Brand_Ticket_Published extends Model
         self::where('id', $ticketId)->delete();
     }
 
+    public static function getAlltickets()
+    {
+        return self::where('b_comp_ticket_date','>',Carbon::now())
+            ->where('b_comp_ticket_seat','>',0)
+            ->get();
+
+
+        
+    }
+    
+    public static function getRequiredTickets($from,$to)
+    {
+        return self::where('b_comp_ticket_date','>',Carbon::now())
+            ->where('b_comp_ticket_from',$from)
+            
+            ->where('b_comp_ticket_to',$to)
+            ->where('b_comp_ticket_seat','>',0)->get();
+
+
+        
+    }
+
+
+    public static function getTicketsbyID($TicketID)
+    {
+        return self::where('id', $TicketID)->first();
+
+        
+    }
+
 
 
 

@@ -1,5 +1,5 @@
 <?php
-// 
+//mvc done
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -62,9 +62,13 @@ class ShowAllBusCompForRanking extends Controller
         $authod_name = Auth::user()->name;
         
         // $data->b_comp_ticket_author_id = $author_id;
-        $user_info = User::where('id', $req->company_id_to_show_rating)->first();
-        $name = $user_info->name;
+        
         $company_id_to_show_rating = $req-> company_id_to_show_rating;
+
+        // $user_info = User::where('id', $req->company_id_to_show_rating)->first();
+        $user_info = User::getUserInfo($company_id_to_show_rating);
+        $name = $user_info->name;
+
         $ratingData = [
             'bus_comp_id' => $company_id_to_show_rating,
             'customer_id' => $author_id,

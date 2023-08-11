@@ -1,5 +1,5 @@
 <?php
-
+// mvc done
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -105,50 +105,40 @@ class BuyTicket extends Controller
 
         $author_id = Auth::user()->id;
         $authod_name = Auth::user()->name;
+        
+        // saving data
         $data = new CustomerBuyTicket;
-        // $data->b_comp_ticket_author_id = $author_id;
         $data -> customer_id = $author_id;
         $data -> customer_name = $authod_name;
         $tickets = $req-> tickets;
-        // $tickets = json_decode($tickets, true);
-        
-        
-
-        // dd($req -> all(), $tickets);
-        // echo $tickets;
-        // $data -> bus_comp_name = $req-> $tickets -> b_comp_ticket_author_name;
-
-
-        
         $data -> TicketID = $req -> TicketID;
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
         $data -> bus_comp_name = $req -> b_comp_ticket_author_name;
         $data -> number_of_seats = $req-> empty_seat;
+
         $seats = $req-> seat;
         $seats = serialize($seats);
-        
-        
-
-
         $data -> seats = $seats;
-        $data -> total_price = "100";
+        
+        $data -> total_price = "100";//calculate
         
         $data -> save();
+        // saving data ends
 
 
         $TicketID = $req-> TicketID;
-        $Ticket = Brand_Ticket_Published::where('id', $TicketID)->first();
+        $Ticket = Brand_Ticket_Published::getTicketsbyID($TicketID);
         $all_empty_seats = $Ticket-> empty_seats;
 
 
-        $seats = unserialize($seats);
+        // $seats = unserialize($seats);
         
-        $all_empty_seats = unserialize($all_empty_seats);
-        // dd($req -> all(), $all_empty_seats);
-        for ($i = 0; $i < count($seats); $i++) {
-            $all_empty_seats[$seats[$i]] = True;         
+        // $all_empty_seats = unserialize($all_empty_seats);
+        // // dd($req -> all(), $all_empty_seats);
+        // for ($i = 0; $i < count($seats); $i++) {
+        //     $all_empty_seats[$seats[$i]] = True;         
             
-        }
+        // }
         // dd($req -> all(), $all_empty_seats);
 
         if ($Ticket) {
@@ -156,11 +146,11 @@ class BuyTicket extends Controller
            
         
             
-            $all_empty_seats = serialize($all_empty_seats);
+            // $all_empty_seats = serialize($all_empty_seats);
         
             
-            $Ticket->update(['empty_seats' => $all_empty_seats]);
-        
+            // $Ticket->update(['empty_seats' => $all_empty_seats]);//
+            $Ticket->updateEmptySeats($seats, $all_empty_seats);
             
         } else {
             
@@ -172,8 +162,8 @@ class BuyTicket extends Controller
 
 
         
-        $allRoutes = DB::select("select * from `bus_routes`");
-        $tickets = Brand_Ticket_Published::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
+        $allRoutes = bus_routes::all();
+        $tickets = Brand_Ticket_Published::getAlltickets();
         $userType = Auth::user()->role;
         
         

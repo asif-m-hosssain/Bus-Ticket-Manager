@@ -101,6 +101,29 @@ class Brand_Ticket_Published extends Model
         
     }
 
+    public function updateEmptySeats($seats,$all_empty_seats)
+    {
+        // $allEmptySeats = unserialize($this->empty_seats);
+        
+        // foreach ($seats as $seat) {
+        //     $allEmptySeats[$seat] = true;
+        // }
+
+        $seats = unserialize($seats);
+        
+        $all_empty_seats = unserialize($all_empty_seats);
+        // // dd($req -> all(), $all_empty_seats);
+        for ($i = 0; $i < count($seats); $i++) {
+            $all_empty_seats[$seats[$i]] = True;         
+            
+        }
+
+
+        
+        $this->empty_seats = serialize($all_empty_seats);
+        $this->save();
+    }
+
 
 
 

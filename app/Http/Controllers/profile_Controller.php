@@ -143,10 +143,12 @@ class profile_Controller extends Controller
         
         // Get the password provided by the user in the request
         $providedPassword = $request-> current_password;
+        $provided_New_Password = $request-> new_password;
         $providedConfirmationPassword = $request-> password_confirmation;
         
         // Perform the password confirmation
-        if (TRUE) {
+        // Hash::check($providedPassword, $hashedPassword)
+        if (Hash::check($providedPassword, $hashedPassword)) {
             // dd($request -> all(),"match");
             // Password is confirmed, proceed with updating the profile
             $user->password = Hash::make($request -> new_password);
@@ -155,13 +157,13 @@ class profile_Controller extends Controller
         
         
         else {
-            
+            // dd($request -> all(),"didn't macth?");
             // Password is not confirmed, return an error response or redirect back
             return redirect()->back()->withErrors(['password' => 'Password confirmation failed. You gave wrong password']);
         }
-        if ($providedPassword != $providedConfirmationPassword){
+        if ($provided_New_Password != $providedConfirmationPassword){
             // dd($request -> all(),"confirm?");
-            return redirect()->back()->withErrors(['confirm_password' => 'Please check the confirm password']);
+            return redirect()->back()->withErrors(['password_confirmation' => 'Check the confirm password']);
 
         }
         

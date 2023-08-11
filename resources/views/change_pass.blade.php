@@ -72,27 +72,27 @@
                                         <label for="new_password" class="col-md-4 col-form-label">{{ __('New Password (at least 8 characters)') }}</label>
 
                                         <div class="col-md-12">
-                                            <input id="new_password" type="password" minlength="8" class="form-control @error('new_password') is-invalid @enderror" name="new_password" required autocomplete="new-password">
+                                            <input id="new_password" type="password" minlength="8" class="form-control " name="new_password" required autocomplete="new-password">
 
                                             
                                         </div>
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
+                                        <label for="password_confirmation" class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
 
                                         <div class="col-md-12">
-                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                            <small class="text-muted">Please make sure the password matches the one above.</small>
-
-                                            @error('confirm_password')
+                                            <input id="password_confirmation" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+                                            @error('password_confirmation') 
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                            <small class="text-muted">Please make sure the password matches the one above.</small>
                                         </div>
                                     </div>
-                            
+
+                                                                
                                     
                                     <button type="submit" class="btn btn-outline-dark btn-block">Update</button>
                                 </form>

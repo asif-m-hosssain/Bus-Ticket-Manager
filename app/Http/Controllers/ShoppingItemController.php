@@ -1,5 +1,5 @@
 <?php
-
+//mvc done
 namespace App\Http\Controllers;
 
 use App\Models\ShoppingItem;
@@ -37,9 +37,13 @@ class ShoppingItemController extends Controller
             if ($quantity > 0) {
                 
                 //Find the cart item for the current food item and user
-                $cartItem = CartItem::where('user_id', $author_id)
-                    ->where('shopping_item_id', $itemId)
-                    ->first();
+
+                // changed for mvc pattern
+                // $cartItem = CartItem::where('user_id', $author_id)
+                //     ->where('shopping_item_id', $itemId)
+                //     ->first();
+                
+                $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId);
 
                 //If a cart item exists, update the quantity
                 if ($cartItem) {

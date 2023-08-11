@@ -21,4 +21,12 @@ class CartItem extends Model
             ->get();
             
     }
+
+    public static function getCartItemForCurrentFoodItemAndUser($author_id,$itemId)
+    {
+        return self::where('user_id', $author_id)
+            ->where('shopping_item_id', $itemId)
+            ->first();
+            
+    }
 }

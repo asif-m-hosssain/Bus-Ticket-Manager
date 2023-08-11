@@ -1,5 +1,5 @@
 <?php
-// mvc done partially
+// mvc done 
 
 // CartController.php
 
@@ -47,7 +47,8 @@ class CartController extends Controller
         }
 
         // ticket details
-        $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        // $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
         // dd($tickets);
         // ticket details ends
         

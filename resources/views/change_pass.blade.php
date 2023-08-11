@@ -46,36 +46,55 @@
                                 <h4 class="mb-0">Edit Profile</h4>
                             </div>
                             <div class="card-body">
-                                <form action="profile_update" method="POST">
+                                <form action="pass_update" method="POST">
                                     @csrf
-                                    <div class="form-group mb-4">
-                                        <label for="name">Name</label>
-                                        <input name="name" type="text" class="form-control rounded-0 bg-dark text-white"
-                                            value="{{ $user -> name }}" required>
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="email">Email</label>
-                                        <input name="email" type="email" class="form-control rounded-0 bg-dark text-white"
-                                            value="{{ $user -> email }}" required>
-                                    </div>
-
-
                                     
+
+                                    <div class="form-group mb-3">
+                                    <label for="password" class="col-md-4 col-form-label">{{ __('Current_Password') }}</label>
+
+                                        <div class="col-md-12">
+                                            <input id="current_password" type="password" class="form-control @error('password') is-invalid @enderror" name="current_password" required autocomplete="current-password">
+
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                    <!-- new -->
+                                    
+
+                                    <div class="form-group mb-3">
+                                        <label for="new_password" class="col-md-4 col-form-label">{{ __('New Password (at least 8 characters)') }}</label>
+
+                                        <div class="col-md-12">
+                                            <input id="new_password" type="password" minlength="8" class="form-control @error('new_password') is-invalid @enderror" name="new_password" required autocomplete="new-password">
+
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label for="password-confirm" class="col-md-4 col-form-label">{{ __('Confirm Password') }}</label>
+
+                                        <div class="col-md-12">
+                                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                            <small class="text-muted">Please make sure the password matches the one above.</small>
+
+                                            @error('confirm_password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
                             
                                     
                                     <button type="submit" class="btn btn-outline-dark btn-block">Update</button>
-                                </form>
-
-
-
-
-
-
-                                <form action="change_password" method="POST">
-                                    @csrf
-                                    
-                                    
-                                    <button type="submit" class="btn btn-outline-dark btn-block">change pass</button>
                                 </form>
                             </div>
                         </div>

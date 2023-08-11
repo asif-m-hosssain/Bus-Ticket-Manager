@@ -40,6 +40,11 @@ Route::POST('funcSubmitEditedTickets','App\Http\Controllers\EditTicketsControlle
 Route::get('profile_edit', [App\Http\Controllers\profile_Controller::class, 'edit_profile'])->name('profile_edit');
 Route::get('/profile_page', [App\Http\Controllers\profile_Controller::class, 'show_profile'])->name('profile');
 Route::POST('profile_update','App\Http\Controllers\profile_Controller@profile_update');
+// change pass
+Route::POST('change_password','App\Http\Controllers\profile_Controller@change_pass');
+Route::get('change_password','App\Http\Controllers\profile_Controller@change_pass');
+Route::POST('pass_update','App\Http\Controllers\profile_Controller@update_password');
+
 
 //Shopping Feature
 // use App\Http\Controllers\ShoppingItemController;

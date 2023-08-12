@@ -74,9 +74,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
 
 
+    
+
+
     // Route::get('/customersearch', [App\Http\Controllers\HomeController::class, 'customersearch'])->name('customersearch'); //parom
     // Route::post('/bookticket', [App\Http\Controllers\HomeController::class, 'bookTicket'])->name('bookticket'); //parom
     Route::POST('/brand-register', [App\Http\Controllers\BController::class, 'store'])->name('brand_register')->middleware('auth'); //parom
+
+    
 
 });
 
@@ -104,3 +109,9 @@ Route::get('/buy_ticket', [App\Http\Controllers\BuyTicket::class, 'showTickets']
 Route::POST('buy_ticket','App\Http\Controllers\BuyTicket@showTickets'); //pressing the search button 
 Route::POST('BuyingTheSelectedTicket','App\Http\Controllers\BuyTicket@select_seats'); //pressing the buying button 
 Route::POST('submit_seat','App\Http\Controllers\BuyTicket@submitted_seat'); //pressing the submit button
+
+// customer clicking cancel
+Route::post('cancel_request', [App\Http\Controllers\BuyTicket::class, 'cancel_request']);//pranta
+// Route::post('cancel_request', 'App\Http\Controllers\BuyTicket@cancel_request');//pranta
+
+

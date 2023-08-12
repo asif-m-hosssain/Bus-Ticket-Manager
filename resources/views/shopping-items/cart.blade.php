@@ -10,8 +10,7 @@
 
 
     
-        <form action="/shopping-items" method="POST">
-            @csrf
+        
             <div class="d-flex justify-content-center">
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -44,13 +43,35 @@
                                     @endforeach
                                 </td>
                                 <td>
+                                <form action="/shopping-items" method="POST">
+                                    @csrf
                                     <div class="form-group">
                                             <input type="hidden" name="bus_comp_name" value="{{ $item -> bus_comp_name}}" >
                                             <input type="hidden" name="bus_comp_id" value="{{ $item -> bus_comp_id}}" >
                                             <button onclick="saveValue(this);" name="ticket_id" value="{{ $item->TicketID }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Buy Foods</button>
                                     </div>
+                                </form>
                                     
                                 </td>
+                                <td>
+                                <form action="cancel_request" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                            <!-- <input type="hidden" name="bus_comp_name" value="{{ $item -> bus_comp_name}}" >
+                                            <input type="hidden" name="bus_comp_id" value="{{ $item -> bus_comp_id}}" > -->
+                                            <button onclick="saveValue(this);" name="cancel_request_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Ticket Cancel request</button>
+                                            @if($item->cancel_ticket_request == 1)
+                                            <br>
+                                            <br>
+                                            <p class="btn btn-outline-secondary"> Pending</p>
+
+                                            @endif
+                                            
+                                    </div>
+
+                                </form>
+                                </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>

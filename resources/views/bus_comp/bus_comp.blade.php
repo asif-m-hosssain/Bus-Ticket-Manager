@@ -38,65 +38,153 @@
         <div class="clearfix"></div>
         <div class="content-wrapper">
             <div class="container-fluid">
-            <div class="card-header">
-                <h4>Sold Tickets </h4>
-            </div>
+            <!-- show cancel request -->
+            
+            <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Cancel Requests </h4>
+                            </div>
+                            <div>
+            
+            
+                                <form action="cancel_sold_tickets" method="POST">
+                                    @csrf
+                                    <div class="d-flex justify-content-center">
+                                        <table class="table align-items-center table-flush table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cumtomer Ticket Number</th>
+                                                    <th>Ticket ID</th>
+                                                    <th>Customer Name</th>
+                                                    <!-- <th>Bus Company ID</th>
+                                                    <th>Bus Company Name</th> -->
+                                                    <th>Seat Count</th>
+                                                    <th>Seat Numbers</th>
+                                                    <th>Cancel Request</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
+                                                @foreach($soldtickets as $item)
+                                                    @if($item['cancel_ticket_request'] == 1)
+                                                        <tr>
+                                                        <td class="text-center">{{ $item['id'] }}</td>
+                                                            <td class="text-center">{{ $item['TicketID'] }}</td>
+                                                            <td class="text-center">{{ $item['customer_name'] }} </td>
+                                                            <!-- <td class="text-center">{{ $item['bus_comp_id'] }}</td>
+                                                            <td class="text-center">{{ $item['bus_comp_name'] }} </td> -->
+                                                            <td class="text-center">{{ count(unserialize($item['seats'])) }}</td>
+                                                            <!-- <td class="text-center">{{ $item['seats'] }}</td> -->
+                                                            <td>
+                                                                @foreach( unserialize($item['seats']) as $i)
+                                                                    <p class="text-center"> {{ $i }}</p>
+                                                                    
+                                                                @endforeach
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                        <input type="hidden" name="TicketID" value="{{ $item -> TicketID}}" >
+                                                                        <input type="hidden" name="booked_seats" value="{{ $item -> seats}}" >
+                                                                        <button onclick="saveValue(this);" name="customer_bought_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Cancel Ticket</button>
+                                                                </div>
+                                                                
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+
+            
+
+            
+                <!-- show cancel request ends -->
+                <br>
+                <br>
+
+           
+                
+                <!--show all ticket-->
+                
                 <!--Start Dashboard Content-->
                 <!-- sold tickets -->
-                <form action="cancel_sold_tickets" method="POST">
-                @csrf
-                <div class="d-flex justify-content-center">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Cumtomer Ticket Number</th>
-                                <th>Ticket ID</th>
-                                <th>Customer Name</th>
-                                <!-- <th>Bus Company ID</th>
-                                <th>Bus Company Name</th> -->
-                                <th>Seat Count</th>
-                                <th>Seat Numbers</th>
-                            </tr>
-                        </thead>
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Sold Tickets </h4>
+                            </div>
+                                <div>
+                                    <form action="cancel_sold_tickets" method="POST">
+                                    @csrf
+                                    <div class="d-flex justify-content-center">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>Cumtomer Ticket Number</th>
+                                                    <th>Ticket ID</th>
+                                                    <th>Customer Name</th>
+                                                    <!-- <th>Bus Company ID</th>
+                                                    <th>Bus Company Name</th> -->
+                                                    <th>Seat Count</th>
+                                                    <th>Seat Numbers</th>
+                                                    <th>Cancel </th>
+                                                </tr>
+                                            </thead>
 
-                        
-                        <!-- Fectching item  information -->
-                        <tbody>
-
-                            @foreach($soldtickets as $item)
-                                <tr>
-                                <td class="text-center">{{ $item['id'] }}</td>
-                                    <td class="text-center">{{ $item['TicketID'] }}</td>
-                                    <td class="text-center">{{ $item['customer_name'] }} </td>
-                                    <!-- <td class="text-center">{{ $item['bus_comp_id'] }}</td>
-                                    <td class="text-center">{{ $item['bus_comp_name'] }} </td> -->
-                                    <td class="text-center">{{ count(unserialize($item['seats'])) }}</td>
-                                    <!-- <td class="text-center">{{ $item['seats'] }}</td> -->
-                                    <td>
-                                        @foreach( unserialize($item['seats']) as $i)
-                                            <p class="text-center"> {{ $i }}</p>
                                             
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <div class="form-group">
-                                                <input type="hidden" name="TicketID" value="{{ $item -> TicketID}}" >
-                                                <input type="hidden" name="booked_seats" value="{{ $item -> seats}}" >
-                                                <button onclick="saveValue(this);" name="customer_bought_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Cancel Ticket</button>
-                                        </div>
-                                        
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                                            <!-- Fectching item  information -->
+                                            <tbody>
 
-                    </table>
+                                                @foreach($soldtickets as $item)
+                                                    <tr>
+                                                    <td class="text-center">{{ $item['id'] }}</td>
+                                                        <td class="text-center">{{ $item['TicketID'] }}</td>
+                                                        <td class="text-center">{{ $item['customer_name'] }} </td>
+                                                        <!-- <td class="text-center">{{ $item['bus_comp_id'] }}</td>
+                                                        <td class="text-center">{{ $item['bus_comp_name'] }} </td> -->
+                                                        <td class="text-center">{{ count(unserialize($item['seats'])) }}</td>
+                                                        <!-- <td class="text-center">{{ $item['seats'] }}</td> -->
+                                                        <td>
+                                                            @foreach( unserialize($item['seats']) as $i)
+                                                                <p class="text-center"> {{ $i }}</p>
+                                                                
+                                                            @endforeach
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                    <input type="hidden" name="TicketID" value="{{ $item -> TicketID}}" >
+                                                                    <input type="hidden" name="booked_seats" value="{{ $item -> seats}}" >
+                                                                    <button onclick="saveValue(this);" name="customer_bought_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Cancel Ticket</button>
+                                                            </div>
+                                                            
+                                                        </td>
+                                                        
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        
+                        </div>
+                    </div>
                 </div>
-            </form>
-
                 <!-- sold tickets ends-->
-               
+               <br>
+               <br>
                 <!--End Dashboard Content-->
                 <!--show all ticket-->
                 <div class="row">

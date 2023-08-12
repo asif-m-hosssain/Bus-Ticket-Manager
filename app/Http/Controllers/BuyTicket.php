@@ -115,6 +115,7 @@ class BuyTicket extends Controller
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
         $data -> bus_comp_name = $req -> b_comp_ticket_author_name;
         $data -> number_of_seats = $req-> empty_seat;
+        $data -> cancel_ticket_request = 0; //cancel request is False
 
         $seats = $req-> seat;
         $seats = serialize($seats);
@@ -175,5 +176,16 @@ class BuyTicket extends Controller
             return Redirect::back();
         }
         
+    }
+
+    public function cancel_request(Request $req)
+    {
+        
+        $cancel_request_ticket_id = $req->input('cancel_request_ticket_id');
+        
+        // Call the model to delete the ticket
+        CustomerBuyTicket::change_cancel_request_to_true($cancel_request_ticket_id);
+        // dd($req -> all());
+        return Redirect::back();
     }
 }

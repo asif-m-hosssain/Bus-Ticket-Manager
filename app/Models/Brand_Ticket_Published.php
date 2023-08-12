@@ -124,6 +124,31 @@ class Brand_Ticket_Published extends Model
         $this->save();
     }
 
+    public static function makeSeatsEmptyAgain($booked_seats,$all_empty_seats,$TicketID)
+    {
+        // $allEmptySeats = unserialize($this->empty_seats);
+        
+        // foreach ($seats as $seat) {
+        //     $allEmptySeats[$seat] = true;
+        // }
+        
+        $booked_seats = unserialize($booked_seats);
+        // $all_empty_seats_before = unserialize($all_empty_seats);
+        
+        $all_empty_seats = unserialize($all_empty_seats);
+        // // dd($req -> all(), $all_empty_seats);
+        for ($i = 0; $i < count($booked_seats); $i++) {
+            $all_empty_seats[$booked_seats[$i]] = False;         
+            
+        }
+
+        // dd( $booked_seats,$all_empty_seats_before,$all_empty_seats);
+        $ticket = self::find($TicketID);
+        $ticket->empty_seats = serialize($all_empty_seats);
+        $ticket->save();
+        
+    }
+
 
 
 

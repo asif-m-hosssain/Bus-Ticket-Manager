@@ -31,6 +31,8 @@ Route::POST('BrandDeleteTicketSubmit','App\Http\Controllers\BrandTicketPublished
 Route::get('/edit_ticket', [App\Http\Controllers\EditTicketsController::class, 'funcEditTickets'])->name('edit_ticket');
 Route::POST('funcSubmitEditedTickets','App\Http\Controllers\EditTicketsController@funcSubmitEditedTickets');
 
+Route::post('/cancel_sold_tickets', [bus_comp_Controller::class, 'cancel_tickets'])->name('------');//to cancel sold tickets
+
 
 // profile for bus company
 // Route::get('bus_company_profile_edit', [App\Http\Controllers\Bus_company_profile_edit_Controller::class, 'show_profile'])->name('bus_company_profile_edit');
@@ -67,6 +69,7 @@ use App\Http\Controllers\CartController;
 Route::middleware('auth')->group(function () {
     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
     Route::post('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index_post');//pranta
+    
     Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
     Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
 

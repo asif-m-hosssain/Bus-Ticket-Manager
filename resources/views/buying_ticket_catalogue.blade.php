@@ -113,6 +113,7 @@
                                 <tr>
                                 
                                     <th>Ticket-ID</th>
+                                    <th>Company Name</th>
                                     <th>From</th>
                                     <th>To</th>
                                     <th>Departure</th>
@@ -126,6 +127,7 @@
                                 @foreach($tickets as $item)
                                     <tr>
                                         <td> {{ $item->id}} </td>
+                                        <td> {{ $item->b_comp_ticket_author_name}} </td>
                                         <td> {{ $item->b_comp_ticket_from}} </td>
                                         <td> {{ $item->b_comp_ticket_to}} </td>
                                         <td> {{ $item->b_comp_ticket_date}} </td>

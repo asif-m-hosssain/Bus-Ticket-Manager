@@ -14,5 +14,16 @@ class CustomerBuyTicket extends Model
         return self::where('customer_id', $userId)
             ->get();
     }
+
+    public static function getAllTicketsSoldByTheCompanyID($author_id)
+    {
+        return self::where('bus_comp_id', $author_id)
+            ->get();
+    }
+
+    public static function deleteCustomerBuyTicketById($customer_bought_ticketId)
+    {
+        self::where('id', $customer_bought_ticketId)->delete();
+    }
    
 }

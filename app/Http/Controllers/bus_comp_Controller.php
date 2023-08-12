@@ -7,6 +7,7 @@ use App\Models\bus_routes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Brand_Ticket_Published;
+use App\Models\CustomerBuyTicket;
 use Illuminate\Support\Facades\Redirect;
 
 class bus_comp_Controller  extends Controller
@@ -41,14 +42,35 @@ class bus_comp_Controller  extends Controller
             $allticket = []; // You can fetch this data from the model if needed
             $numberofticket = count($allticket);
             $totalrevenue = 0;
+            // $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
+            $soldtickets = CustomerBuyTicket::getAllTicketsSoldByTheCompanyID($author_id);
+
 
             foreach ($allticket as $item) {
                 $totalrevenue += $item->totalprice;
             }
 
-            return view('bus_comp.bus_comp', compact('allRoutes', 'brandSpecifiedTicket', 'brandSpecifiedExpiredTicketDate', 'brandSpecifiedExpiredTicketSeat', 'allticket', 'numberofticket', 'totalrevenue'));
+            return view('bus_comp.bus_comp', compact('allRoutes', 'brandSpecifiedTicket', 'brandSpecifiedExpiredTicketDate', 'brandSpecifiedExpiredTicketSeat', 'allticket', 'numberofticket', 'totalrevenue', 'soldtickets'));
         } else {
             return Redirect::back();
         }
+    }
+
+    public function cancel_tickets(Request $req)
+    {
+        // dd($req -> all(),"doesit work?");
+        $customer_bought_ticketId = $req->input('customer_bought_ticket_id');
+        $booked_seats = $req->input('booked_seats');
+        
+        // Call the model to delete the ticket
+        CustomerBuyTicket::deleteCustomerBuyTicketById($customer_bought_ticketId);
+
+        // make the seats empty again
+        $TicketID = $req->input('TicketID');
+        $Ticket = Brand_Ticket_Published::getTicketsbyID($TicketID);
+        $all_empty_seats = $Ticket-> empty_seats;
+        Brand_Ticket_Published::makeSeatsEmptyAgain($booked_seats,$all_empty_seats,$TicketID);
+        // dd($req -> all(),$booked_seats,$all_empty_seats);
+        return redirect()->back();
     }
 }

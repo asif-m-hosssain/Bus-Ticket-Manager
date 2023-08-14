@@ -91,10 +91,10 @@
                                     <!-- <a class="dropdown-item" href="{{ route('brand') }}">
                                         {{ __('Ticketing') }}
                                     </a> -->
-                                    @if (Auth::user()->role == "Customer")
+                                    <!-- @if (Auth::user()->role == "Customer")
                                     <a class="dropdown-item" href="{{ route('shopping-items.index') }}">
                                         {{ __('Food') }}
-                                    </a>
+                                    </a> -->
                                     @endif
                                     @if (Auth::user()->role == "Customer")
                                     <a class="dropdown-item" href="{{ route('shopping-items.cart') }}">

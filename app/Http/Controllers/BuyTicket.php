@@ -110,7 +110,20 @@ class BuyTicket extends Controller
         $data = new CustomerBuyTicket;
         $data -> customer_id = $author_id;
         $data -> customer_name = $authod_name;
-        $tickets = $req-> tickets;
+
+
+        $Ticket = Brand_Ticket_Published::getTicketsbyID($req -> TicketID);
+
+        $single_ticket_price = $Ticket->b_comp_ticket_price;
+        
+        // dd($single_ticket_price);
+        $seats = $req-> seat;
+        // dd($seats);
+        
+        $seat_count = count($seats);
+        $total_price = $single_ticket_price * $seat_count;
+        // dd($single_ticket_price, $seat_count,$total_price);
+
         $data -> TicketID = $req -> TicketID;
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
         $data -> bus_comp_name = $req -> b_comp_ticket_author_name;
@@ -121,7 +134,7 @@ class BuyTicket extends Controller
         $seats = serialize($seats);
         $data -> seats = $seats;
         
-        $data -> total_price = "100";//calculate
+        $data -> total_price = $total_price;//calculate
         
         $data -> save();
         // saving data ends

@@ -52,7 +52,7 @@
                             </div>
                             <hr>
                             
-                            <p>total number of seats {{$Empty_seat}}</p>
+                            <!-- <p>total number of seats {{$Empty_seat}}</p> -->
                             <!-- @for ($i = 1; $i < count($empty_seat); $i=$i+2)
                                 @if ($empty_seat[$i] == False)
                                     <input type="checkbox" name="seat[]" value="{{ $i }}"> {{ $i }}<br>

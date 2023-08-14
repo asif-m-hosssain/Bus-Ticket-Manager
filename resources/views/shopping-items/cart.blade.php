@@ -19,6 +19,7 @@
                             <th>Customer Name</th>
                             <th>Bus Company ID</th>
                             <th>Bus Company Name</th>
+                            <th>Total Ticket Price</th>
                             <th>Seat Count</th>
                             <th>Seat Numbers</th>
                         </tr>
@@ -34,6 +35,7 @@
                                 <td class="text-center">{{ $item['customer_name'] }} </td>
                                 <td class="text-center">{{ $item['bus_comp_id'] }}</td>
                                 <td class="text-center">{{ $item['bus_comp_name'] }} </td>
+                                <td class="text-center">{{ $item['total_price'] }} </td>
                                 <td class="text-center">{{ count(unserialize($item['seats'])) }}</td>
                                 <!-- <td class="text-center">{{ $item['seats'] }}</td> -->
                                 <td>
@@ -84,7 +86,7 @@
         
     <!-- table to show tickets running ends-->
         <br>
-        <p>different table</p>
+        
         <!-- Main table -->    
         <table class="table table-bordered table-striped">
             <thead>
@@ -117,7 +119,9 @@
     <div class="d-flex justify-content-center mt-4">
         <div class="card">
             <div class="card-body">
-                GRAND TOTAL (BDT): {{ collect($detailedCartItems)->sum('total') }} TK
+                
+                GRAND TOTAL (BDT): {{ collect($detailedCartItems)->sum('total') + collect($tickets)->sum('total_price') }} TK
+                <!-- GRAND TOTAL (BDT): {{ collect($tickets)->sum('total_price') }} TK -->
             </div>
         </div>
     </div>

@@ -103,7 +103,7 @@
                             
                             <hr>
                             <div class="form-group">
-                                <label for="input-6">ticket</label>
+                                <label for="input-6">Ticket</label>
                                 <select required class="form-control form-control-rounded" name="ticket_id" id="input-6" placeholder="select">>
                                     @foreach($brandSpecifiedTicket as $item)
                                     <option onkeyup="saveValue(this);" value="{{ $item->id }}"> Ticket-ID: {{ $item->id}} </option>
@@ -135,7 +135,7 @@
                             
                             <hr>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
+                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Add Food </button>
                             </div>
                         </div>
                     </div>

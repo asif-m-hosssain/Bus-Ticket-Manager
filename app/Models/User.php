@@ -49,5 +49,11 @@ class User extends Authenticatable
         return self::where('role', $role)
             ->get();
     }
+
+    public static function getUserInfo($company_id_to_show_rating)
+    {
+        return self::where('id', $company_id_to_show_rating)
+            ->first();
+    }
     
 }

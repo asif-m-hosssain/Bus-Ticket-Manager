@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ShoppingItem;
 use App\Models\CartItem;
+use App\Models\CustomerBuyTicket;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -60,7 +61,43 @@ class ShoppingItemController extends Controller
             }
         }
         
-        return redirect()->back()->with('success', 'Cart updated successfully.');
+        // return redirect()->back()->with('success', 'Cart updated successfully.');
+        // to return back to cart again
+
+        $userId = Auth::id();
+        
+        //Fetch cart items for the authenticated logged in  user
+        // $cartItems = CartItem::where('user_id', $userId)->get(); changed for mvc pattern
+        $cartItems = CartItem::fetch_cart_items($userId);
+
+        //Empty array initialization to store the cart items details and info
+        $detailedCartItems = [];
+
+        //Looping through each cart item and fetching the associated shopping item info 
+        foreach ($cartItems as $cartItem) {
+            $shoppingItem = $cartItem->shoppingItem;
+
+            //Array creation with the cart item info
+            $detailedCartItem = [
+                'name' => $shoppingItem->name,
+                'price' => $shoppingItem->price,
+                'quantity' => $cartItem->quantity,
+                'total' => $shoppingItem->price * $cartItem->quantity,
+            ];
+
+            //Add the detailed cart item to the array
+            $detailedCartItems[] = $detailedCartItem; //is it redundent?
+        }
+
+        // ticket details
+        // $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
+        
+        // ticket details ends
+        
+
+        //Pass the detailed cart items to the cart view
+        return view('shopping-items.cart', compact('detailedCartItems','tickets'));
     }
 
 }

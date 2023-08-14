@@ -95,7 +95,7 @@
                                     <a class="dropdown-item" href="{{ route('shopping-items.index') }}">
                                         {{ __('Food') }}
                                     </a> -->
-                                    @endif
+                                    <!-- @endif -->
                                     @if (Auth::user()->role == "Customer")
                                     <a class="dropdown-item" href="{{ route('shopping-items.cart') }}">
                                         {{ __('Cart') }}

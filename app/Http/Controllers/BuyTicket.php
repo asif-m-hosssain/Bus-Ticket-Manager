@@ -1,5 +1,6 @@
 <?php
 // mvc done
+//customer can select tickets.
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -37,7 +38,7 @@ class BuyTicket extends Controller
 
             $from = $req-> Start_RouteName;
             $to = $req-> Destination_RouteName;
-            $sate = $req-> Start_Time;
+            $date = $req-> Start_Time;
             // $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_from',$from)->where('b_comp_ticket_to',$to)->where('b_comp_ticket_seat','>',0)->get();
             $tickets = Brand_Ticket_Published::getRequiredTickets($from,$to);
         }else{

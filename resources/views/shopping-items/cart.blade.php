@@ -26,7 +26,7 @@
                     </thead>
 
                     
-                    <!-- Fectching item  information -->
+                    
                     <tbody>
 
                         @foreach($tickets as $item)
@@ -56,6 +56,8 @@
                                     
                                 </td>
                                 <td>
+                                
+                                <!-- customer cancelling ticket book -->
                                 <form action="cancel_request" method="POST">
                                     @csrf
                                     <div class="form-group">
@@ -86,7 +88,7 @@
         
     <!-- table to show tickets running ends-->
         <br>
-        
+        <!-- Bought food table -->
         <!-- Main table -->    
         <table class="table table-bordered table-striped">
             <thead>

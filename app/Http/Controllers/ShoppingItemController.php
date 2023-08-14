@@ -18,7 +18,11 @@ class ShoppingItemController extends Controller
         $bus_comp_name = $request-> bus_comp_name;
         $bus_comp_id = $request-> bus_comp_id;
         // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton ends
-        $shoppingItems = ShoppingItem::where('ticket_id', $ticket_id)->get();
+        $shoppingItems = ShoppingItem::fetchingShoppingItem($ticket_id);
+        // $shoppingItems = ShoppingItem::where('ticket_id', $ticket_id)->get();
+        // $shoppingItems = ShoppingItem::fetchingShopingItem($ticket_id);
+        
+
         // dd($request -> all(), $shoppingItems);
         return view('shopping-items.index', compact('shoppingItems'));
     }
@@ -62,8 +66,9 @@ class ShoppingItemController extends Controller
         }
         
         // return redirect()->back()->with('success', 'Cart updated successfully.');
+        
+        //-------------------------------------------------------------------------------------------------------------
         // to return back to cart again
-
         $userId = Auth::id();
         
         //Fetch cart items for the authenticated logged in  user

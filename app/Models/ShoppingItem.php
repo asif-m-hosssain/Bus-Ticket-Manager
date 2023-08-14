@@ -9,6 +9,11 @@ class ShoppingItem extends Model
 {
     use HasFactory;
 
+    public static function fetchingShoppingItem($ticket_id)
+    {
+        return self::where('ticket_id', $ticket_id)->get();
+    }
+
     protected $table = 'shopping_items';
     protected $primaryKey = 'item_id'; //Specifying the primary key column (for cart info display implementaion )
 
@@ -26,6 +31,8 @@ class ShoppingItem extends Model
                     ->withPivot('quantity')
                     ->withTimestamps();
     }
+
+    
 
 }
 

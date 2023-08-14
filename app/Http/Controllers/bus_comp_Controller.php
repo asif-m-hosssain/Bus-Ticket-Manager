@@ -1,5 +1,6 @@
 <?php
 // mvc done
+// this is for bus company. It shows the page ticketing.
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
@@ -17,40 +18,41 @@ class bus_comp_Controller  extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index() //it sends all the data that are required to load the page
     {
         $userType = Auth::user()->role;
 
         if ($userType == 'Brand' || $userType == 'Admin') {
             $author_id = Auth::user()->id;
             $allRoutes = bus_routes::all();
-            $brandSpecifiedTicket = Brand_Ticket_Published::getActiveTicketsForAuthor($author_id);
+            $brandSpecifiedTicket = Brand_Ticket_Published::getActiveTicketsForAuthor($author_id); //it is showing the available tickets. meaning not expired tickets. 
             // $brandSpecifiedTicket = Brand_Ticket_Published::where('b_comp_ticket_author_id', $author_id)
             //     ->where('b_comp_ticket_date', '>', Carbon::now())
             //     ->where('b_comp_ticket_seat', '>', 0)
             //     ->get();
-            $brandSpecifiedExpiredTicketDate = Brand_Ticket_Published::getBrandSpecifiedExpiredTicketDate($author_id);
+            $brandSpecifiedExpiredTicketDate = Brand_Ticket_Published::getBrandSpecifiedExpiredTicketDate($author_id); //it is showing the expired  tickets.
             // $brandSpecifiedExpiredTicketDate = Brand_Ticket_Published::where('b_comp_ticket_author_id', $author_id)
             //     ->where('b_comp_ticket_date', '<', Carbon::now())
             //     ->get();
             
-            $brandSpecifiedExpiredTicketSeat = Brand_Ticket_Published::getbrandSpecifiedExpiredTicketSeat($author_id);
+            $brandSpecifiedExpiredTicketSeat = Brand_Ticket_Published::getbrandSpecifiedExpiredTicketSeat($author_id); //not exactly sure. most likely redundant
             // $brandSpecifiedExpiredTicketSeat = Brand_Ticket_Published::where('b_comp_ticket_author_id', $author_id)
             //     ->where('b_comp_ticket_seat', '=', 0)
             //     ->get();
 
-            $allticket = []; // You can fetch this data from the model if needed
-            $numberofticket = count($allticket);
-            $totalrevenue = 0;
+            // $allticket = []; // You can fetch this data from the model if needed
+            // $numberofticket = count($allticket); // You can fetch this data from the model if needed
+            // $totalrevenue = 0; // You can fetch this data from the model if needed
             // $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
             $soldtickets = CustomerBuyTicket::getAllTicketsSoldByTheCompanyID($author_id);
 
 
-            foreach ($allticket as $item) {
-                $totalrevenue += $item->totalprice;
-            }
+            // foreach ($allticket as $item) {
+            //     $totalrevenue += $item->totalprice;
+            // }
 
-            return view('bus_comp.bus_comp', compact('allRoutes', 'brandSpecifiedTicket', 'brandSpecifiedExpiredTicketDate', 'brandSpecifiedExpiredTicketSeat', 'allticket', 'numberofticket', 'totalrevenue', 'soldtickets'));
+            // return view('bus_comp.bus_comp', compact('allRoutes', 'brandSpecifiedTicket', 'brandSpecifiedExpiredTicketDate', 'brandSpecifiedExpiredTicketSeat', 'allticket', 'numberofticket', 'totalrevenue', 'soldtickets'));
+            return view('bus_comp.bus_comp', compact('allRoutes', 'brandSpecifiedTicket', 'brandSpecifiedExpiredTicketDate', 'soldtickets'));
         } else {
             return Redirect::back();
         }

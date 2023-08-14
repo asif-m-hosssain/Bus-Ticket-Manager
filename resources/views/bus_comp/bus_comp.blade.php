@@ -55,14 +55,14 @@
                                         <table class="table align-items-center table-flush table-borderless">
                                             <thead>
                                                 <tr>
-                                                    <th>Cumtomer Ticket Number</th>
-                                                    <th>Ticket ID</th>
-                                                    <th>Customer Name</th>
+                                                    <th class="text-center">Cumtomer Ticket Number</th>
+                                                    <th class="text-center">Ticket ID</th>
+                                                    <th class="text-center">Customer Name</th>
                                                     <!-- <th>Bus Company ID</th>
                                                     <th>Bus Company Name</th> -->
-                                                    <th>Seat Count</th>
-                                                    <th>Seat Numbers</th>
-                                                    <th>Cancel Request</th>
+                                                    <th class="text-center">Seat Count</th>
+                                                    <th class="text-center">Seat Numbers</th>
+                                                    <th class="text-center">Cancel Request</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -85,11 +85,19 @@
                                                                 @endforeach
                                                             </td>
                                                             <td>
-                                                                <div class="form-group">
-                                                                        <input type="hidden" name="TicketID" value="{{ $item -> TicketID}}" >
-                                                                        <input type="hidden" name="booked_seats" value="{{ $item -> seats}}" >
-                                                                        <button onclick="saveValue(this);" name="customer_bought_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Cancel Ticket</button>
-                                                                </div>
+                                                            <div class="d-flex justify-content-center mt-4">                                                                                                                                                                                                        
+                                                                <div class="form-group center">
+                                                                    <input type="hidden" name="TicketID" value="{{ $item -> TicketID}}" >
+                                                                    <input type="hidden" name="booked_seats" value="{{ $item -> seats}}" >
+                                                                    <button onclick="saveValue(this);" name="customer_bought_ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Cancel Ticket</button>
+                                                                </div>                                                                                                                                                                                                        
+                                                            </div>
+
+
+
+
+
+                                                                
                                                                 
                                                             </td>
                                                             
@@ -272,16 +280,7 @@
                                         <td> {{ $item->created_at   }} </td>
                                         </tr>
                                         @endforeach
-                                        @foreach($brandSpecifiedExpiredTicketSeat as $item)
-                                        <td> {{ $item->id}} </td>
-                                        <td> {{ $item->b_comp_ticket_from}} </td>
-                                        <td> {{ $item->b_comp_ticket_to}} </td>
-                                        <td> {{ $item->b_comp_ticket_date}} </td>
-                                        <td> {{ $item->b_comp_ticket_seat}} </td>
-                                        <td> {{ $item->b_comp_ticket_price}} </td>
-                                        <td> {{ $item->created_at   }} </td>
-                                        </tr>
-                                        @endforeach
+                                        
                                     </tbody>
                                 </table>
                             </div>

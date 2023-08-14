@@ -31,7 +31,7 @@ Route::POST('BrandDeleteTicketSubmit','App\Http\Controllers\BrandTicketPublished
 Route::get('/edit_ticket', [App\Http\Controllers\EditTicketsController::class, 'funcEditTickets'])->name('edit_ticket');
 Route::POST('funcSubmitEditedTickets','App\Http\Controllers\EditTicketsController@funcSubmitEditedTickets');
 
-Route::post('/cancel_sold_tickets', [bus_comp_Controller::class, 'cancel_tickets'])->name('------');//to cancel sold tickets
+
 
 
 // profile for bus company
@@ -105,8 +105,8 @@ Route::POST('submit_rating','App\Http\Controllers\ShowAllBusCompForRanking@give_
 
 
 // showing all tickets
-Route::get('/buy_ticket', [App\Http\Controllers\BuyTicket::class, 'showTickets'])->name('buy_ticket');
-Route::POST('buy_ticket','App\Http\Controllers\BuyTicket@showTickets'); //pressing the search button 
+Route::get('/buy_ticket', [App\Http\Controllers\BuyTicket::class, 'showTickets'])->name('buy_ticket'); //Buy Ticket from Drop down in notification bar 
+Route::POST('buy_ticket','App\Http\Controllers\BuyTicket@showTickets'); //pressing the search button / submit button 
 Route::POST('BuyingTheSelectedTicket','App\Http\Controllers\BuyTicket@select_seats'); //pressing the buying button 
 Route::POST('submit_seat','App\Http\Controllers\BuyTicket@submitted_seat'); //pressing the submit button
 
@@ -114,4 +114,4 @@ Route::POST('submit_seat','App\Http\Controllers\BuyTicket@submitted_seat'); //pr
 Route::post('cancel_request', [App\Http\Controllers\BuyTicket::class, 'cancel_request']);//pranta
 // Route::post('cancel_request', 'App\Http\Controllers\BuyTicket@cancel_request');//pranta
 
-
+Route::post('/cancel_sold_tickets', [bus_comp_Controller::class, 'cancel_tickets'])->name('------');//to cancel sold tickets

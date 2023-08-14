@@ -5,6 +5,10 @@
 <html lang="en">
 
 <head>
+    <!-- Add your meta tags, stylesheets, and other head content here -->
+    <!-- Add animate.css library for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -25,18 +29,18 @@
         <div class="content-wrapper">
             <div class="container-fluid">
 
-                <!-- Start Dashboard Content -->
-
-                <!--End Dashboard Content-->
                 <!-- Show company profile -->
                 <div class="row mt-4">
                     <div class="col-12 col-lg-12">
                         <div class="card">
                             <div class="card-header bg-primary text-white">
-                                <h4 class="mb-0">COMPANY PROFILE</h4>
+                                <h4 class="mb-0 welcome-animation">BUS COMPANY PROFILE</h4>
                             </div>
                             <div class="card-body">
-                                <table class="table table-borderless">
+                                <div class="cover-photo">
+                                    <a href="https://ibb.co/KyZQwm7"><img src="https://i.ibb.co/QmBqdXn/bus2.jpg" alt="Cover Photo" class="img-fluid cover-img"></a>
+                                </div>
+                                <table class="table table-borderless mt-4">
                                     <thead>
                                         <tr>
                                             <th>COMPANY_ID</th>
@@ -46,9 +50,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
+                                            <td class="welcome-animation">{{ $user -> id }}</td>
+                                            <td class="welcome-animation">{{ $user -> name }}</td>
+                                            <td class="welcome-animation">{{ $user -> email }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -58,107 +62,97 @@
                 </div>
                 <!-- End company profile -->
 
-                <div class="row mt-3">
-                    <div class="col-12 col-lg-12">
-                        <button class="btn btn-outline-primary">
-                            <a href="{{ route('profile_edit') }}" style="text-decoration: none; color: inherit;">
-                                <i class="fa fa-pencil"></i> Edit Profile
-                            </a>
-                        </button>
+                <div class="d-flex justify-content-center mt-4">
+                    <div class="row mt-3">
+                        <div class="col-12 col-lg-12">
+                            <button class="btn btn-outline-primary">
+                                <a href="{{ route('profile_edit') }}" style="text-decoration: none; color: inherit;">
+                                    <i class="fa fa-pencil"></i> Edit Profile
+                                </a>
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                
+
+                <!-- Welcome message from EasyGo -->
+                <div class="row mt-4">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Welcome to EasyGo</h4>
+                                <p class="card-text">
+                                    At EasyGo, we strive to provide you with the best travel experience. We welcome you to have a smooth and
+                                    hassle-free journey with us. Our dedicated team is committed to offering top-notch service to our customers.
+                                    Your comfort and satisfaction are our top priorities. As we embark on this journey together, we kindly
+                                    request your cooperation in ensuring the best service for all passengers. Let's make every trip memorable and
+                                    enjoyable!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End welcome message -->
 
             </div>
         </div>
     </div>
-    <!---------------------------------->
 
-    <!--Start overlay-->
-    <div class="overlay toggle-menu"></div>
-    <!--end overlay-->
-    </div>
-    <!-- End container-fluid-->
-    </div>
-    <!--End content-wrapper-->
-    <!--Start Back To Top Button-->
-    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-    <!--End Back To Top Button-->
+    <!-- ... (Your existing overlay, back to top button, and closing tags) ... -->
 
-    <!--Start footer-->
-    <footer class="footer bg-dark text-white text-center py-3">
-        <div class="container">
-            <!-- Footer content goes here -->
-        </div>
-    </footer>
-    <!--End footer-->
+    <!-- Additional styles -->
+    <style>
+        /* ... (Your existing styles) ... */
+
+        /* Animation styles */
+        .welcome-animation {
+            animation: fadeInUp 1s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Cover Photo Styling */
+        .cover-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cover-img {
+            max-width: 100%;
+            height: auto;
+            max-height: 40vh; /* Adjust the value as needed */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+
+    <script>
+        // JavaScript to trigger the welcome animation on page load
+        document.addEventListener("DOMContentLoaded", function () {
+            const profileName = document.querySelectorAll(".welcome-animation");
+            for (let i = 0; i < profileName.length; i++) {
+                profileName[i].style.opacity = "1";
+            }
+        });
+    </script>
 
 </body>
-
-</html>
-
-<style>
-    /* Body Background Styling */
-    body {
-        background-color: #f0e6e6;
-    }
-
-    /* Welcome Animation */
-    .welcome-animation {
-        animation: fadeInUp 1s ease-in-out;
-        opacity: 0;
-        animation-fill-mode: forwards;
-    }
-
-    @keyframes fadeInUp {
-        0% {
-            transform: translateY(20px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-
-    /* Card Styling */
-    .card {
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-header {
-        border-radius: 8px 8px 0 0;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    /* Button Styling */
-    .btn-outline-primary {
-        color: #007bff;
-        border-color: #007bff;
-    }
-
-    .btn-outline-primary:hover {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    /* Footer Styling */
-    .footer {
-        background-color: #292b2c;
-        color: #fff;
-    }
-</style>
-
-<script>
-    // JavaScript to trigger the welcome animation on page load
-    document.addEventListener("DOMContentLoaded", function () {
-        const profileName = document.querySelector(".welcome-animation");
-        profileName.style.opacity = "1";
-    });
-</script>
 
 @endsection

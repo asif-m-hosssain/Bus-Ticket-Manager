@@ -862,6 +862,17 @@
             font-weight: bold;
         }
 
+        .image-slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            height: 150px; /* Adjust as needed */
+            overflow: hidden;
+        }
+
+        
+
 
     </style>
 
@@ -869,6 +880,7 @@
 </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 <body class="antialiased">
     <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
@@ -894,7 +906,7 @@
                 EasyGO
             </div>
 
-            <div class="container text-gray-500">
+            {{-- <div class="container text-gray-500">
 
                 <h2>Available Ticket Search</h2>
                 <input type="text" id="searchInput" placeholder="Search ticket from/to">
@@ -929,7 +941,34 @@
                 $('#searchInput').on('input', function() {
                     performLiveSearch();
                 });
-            </script>
+            </script> --}}
+
+            <div class="image-slider">
+                <img src="{{ asset('food_images/bus1.jpg') }}" alt="Bus 1" class="slider-image">
+                <img src="{{ asset('food_images/bus2.jpg') }}" alt="Bus 2" class="slider-image">
+            
+
+
+
+                <script>
+                    
+                    var slideIndex = 0;
+                    carousel();
+
+                    function carousel() {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = "none";
+                        }
+                        slideIndex++;
+                        if (slideIndex > x.length) {slideIndex = 1}
+                        x[slideIndex-1].style.display = "block";
+                        setTimeout(carousel, 2000); // Change image every 2 seconds
+                    }
+
+                </script>
+            </div>
 
         </div>
     </div>

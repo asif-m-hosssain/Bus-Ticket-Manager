@@ -1,5 +1,5 @@
 <?php
-// mvc done
+// mvc done d
 //customer can select tickets.
 namespace App\Http\Controllers;
 
@@ -71,9 +71,10 @@ class BuyTicket extends Controller
         // $Ticket = bus_company_published_ticket::where('id', $TicketID)->first();
         
         $Ticket = Brand_Ticket_Published::getTicketsbyID($TicketID);
-
+        
         $b_comp_ticket_author_name = $Ticket->b_comp_ticket_author_name;
         $b_comp_ticket_author_id = $Ticket->b_comp_ticket_author_id;
+        
 
         $empty_seat = $Ticket->empty_seats;
         $empty_seat = unserialize($empty_seat);
@@ -112,8 +113,11 @@ class BuyTicket extends Controller
         $data -> customer_id = $author_id;
         $data -> customer_name = $authod_name;
 
-
+        // getting date
         $Ticket = Brand_Ticket_Published::getTicketsbyID($req -> TicketID);
+        
+        $b_comp_ticket_date = $Ticket->b_comp_ticket_date;
+        // getting date ends
 
         $single_ticket_price = $Ticket->b_comp_ticket_price;
         
@@ -129,6 +133,7 @@ class BuyTicket extends Controller
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
         $data -> bus_comp_name = $req -> b_comp_ticket_author_name;
         $data -> number_of_seats = $req-> empty_seat;
+        $data -> b_comp_ticket_date = $b_comp_ticket_date;
         $data -> cancel_ticket_request = 0; //cancel request is False
 
         $seats = $req-> seat;

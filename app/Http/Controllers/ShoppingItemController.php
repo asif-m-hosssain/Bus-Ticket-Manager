@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ShoppingItem;
 use App\Models\CartItem;
 use App\Models\CustomerBuyTicket;
+use App\Models\Brand_Ticket_Published;
+
 use Illuminate\Http\Request;
 use Auth;
 
@@ -32,7 +34,7 @@ class ShoppingItemController extends Controller
     public function addToCart(Request $request)
     {
         $author_id = Auth::user()->id;
-        
+        // dd($request -> all());
         //Get the quantities from the form input
         $quantities = $request->input('item_quantity');
         // dd($request -> all(),$quantities);
@@ -49,6 +51,11 @@ class ShoppingItemController extends Controller
                 //     ->first();
                 
                 $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId);
+                
+                // getting date
+                $Ticket = Brand_Ticket_Published::getTicketsbyID($request->input('ticket_id'));
+        
+                $b_comp_ticket_date = $Ticket->b_comp_ticket_date;
 
                 //If a cart item exists, update the quantity
                 if ($cartItem) {
@@ -59,6 +66,13 @@ class ShoppingItemController extends Controller
                     $cartItem = new CartItem();
                     $cartItem->user_id = $author_id;
                     $cartItem->shopping_item_id = $itemId;
+                    // $cartItem->shopping_item_id = $itemId;
+                    $cartItem->ticket_id = $request->input('ticket_id');
+                    $cartItem->bus_comp_id = $request->input('bus_comp_id');
+                    $cartItem->bus_comp_name = $request->input('bus_comp_name');
+                    $cartItem->b_comp_ticket_date = $b_comp_ticket_date;
+                    
+
                     $cartItem->quantity = $quantity;
                     $cartItem->save();
                 }

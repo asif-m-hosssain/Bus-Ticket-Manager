@@ -47,8 +47,13 @@
                                 </div>
                             </td>
                             
-                            <!-- Hidden input field to store the food ID -->
+                            <!-- Hidden input field to store the food ID and other datas-->
                             <input type="hidden" name="food_id[]" value="{{ $item->item_id }}">
+
+                            <!-- to control active foods and show company details -->
+                            <input type="hidden" name="ticket_id" value="{{ $item->ticket_id }}">
+                            <input type="hidden" name="bus_comp_id" value="{{ $item->bus_comp_id }}">
+                            <input type="hidden" name="bus_comp_name" value="{{ $item->bus_comp_name }}">
 
                             <!-- ADD Button -->
                             <!-- <td class="text-center"> 

@@ -72,7 +72,8 @@ class Brand_Ticket_Published extends Model
     }
 
     public static function getAlltickets()
-    {
+    {   
+        // dd(Carbon::now());
         return self::where('b_comp_ticket_date','>',Carbon::now())
             ->where('b_comp_ticket_seat','>',0)
             ->get();

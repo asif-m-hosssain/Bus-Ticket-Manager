@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class CartItem extends Model
 {
     protected $table="cart_items";
@@ -17,7 +17,8 @@ class CartItem extends Model
 
     public static function fetch_cart_items($userId)
     {
-        return self::where('user_id', $userId)
+        return self::where('b_comp_ticket_date','>',Carbon::now())
+            ->where('user_id', $userId)
             ->get();
             
     }

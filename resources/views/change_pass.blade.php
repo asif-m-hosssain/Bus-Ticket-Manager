@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Edit Profile - Bus Company</title>
+    <title>Change Pass</title>
     <!-- loader-->
 
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -38,7 +38,7 @@
         <div class="content-wrapper">
             <div class="container-fluid">
 
-                <!--Bus_company_profile_edit starts -->
+                <!--pass change starts -->
                 <div class="row mt-4">
                     <div class="col-12 col-lg-6 offset-lg-3">
                         <div class="card">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Bus_company_profile_edit ends -->
+                <!--pass change ends -->
             </div>
         </div>
     </div>

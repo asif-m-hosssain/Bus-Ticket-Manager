@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\bus_routes;
+use App\Models\CartItem;
 
 class BuyTicket extends Controller
 {
@@ -26,12 +27,9 @@ class BuyTicket extends Controller
         $author_id = Auth::user()->id;
         $author_name = Auth::user()->name;
         $allRoutes = bus_routes::all();
-        // $brandSpecifiedTicket = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
-        // $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
+        
         $tickets = Brand_Ticket_Published::getAlltickets();
-        // $brandSpecifiedExpiredTicketDate = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_date','<',Carbon::now())->get();
-        // $brandSpecifiedExpiredTicketSeat = bus_company_published_ticket::where('b_comp_ticket_author_id', $author_id)->where('b_comp_ticket_seat','=',0)->get();
-        // dd($req -> all(),"doesit work?");
+        
 
         
         if($req){
@@ -39,10 +37,10 @@ class BuyTicket extends Controller
             $from = $req-> Start_RouteName;
             $to = $req-> Destination_RouteName;
             $date = $req-> Start_Time;
-            // $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_from',$from)->where('b_comp_ticket_to',$to)->where('b_comp_ticket_seat','>',0)->get();
+            
             $tickets = Brand_Ticket_Published::getRequiredTickets($from,$to);
         }else{
-            // $tickets = bus_company_published_ticket::where('b_comp_ticket_date','>',Carbon::now())->where('b_comp_ticket_seat','>',0)->get();
+            
         }
         
         $userType = Auth::user()->role;
@@ -61,14 +59,12 @@ class BuyTicket extends Controller
     public function select_seats(Request $req)
     {
         
-        // dd($req -> all(),"doesit work?");
+        
         $author_id = Auth::user()->id;
         $authod_name = Auth::user()->name;
         $userType = Auth::user()->role;
         $TicketID = $req-> ticket_id;
-        // dd($req -> all(),$id);
         
-        // $Ticket = bus_company_published_ticket::where('id', $TicketID)->first();
         
         $Ticket = Brand_Ticket_Published::getTicketsbyID($TicketID);
         
@@ -78,7 +74,7 @@ class BuyTicket extends Controller
 
         $empty_seat = $Ticket->empty_seats;
         $empty_seat = unserialize($empty_seat);
-        // dd($req -> all(),$empty_seat);
+        
 
 
         $Empty_seat = 36;
@@ -96,12 +92,9 @@ class BuyTicket extends Controller
     public function submitted_seat(Request $req)
     {
         
-        // dd($req -> all());
+        
         $seats = $req-> seat;
-        // foreach($seats as $item){
-
-        //     echo $item. "  ,  ";
-        // }
+        
             
 
 
@@ -121,13 +114,13 @@ class BuyTicket extends Controller
 
         $single_ticket_price = $Ticket->b_comp_ticket_price;
         
-        // dd($single_ticket_price);
+        
         $seats = $req-> seat;
-        // dd($seats);
+        
         
         $seat_count = count($seats);
         $total_price = $single_ticket_price * $seat_count;
-        // dd($single_ticket_price, $seat_count,$total_price);
+        
 
         $data -> TicketID = $req -> TicketID;
         $data -> bus_comp_id = $req -> b_comp_ticket_author_id;
@@ -151,25 +144,13 @@ class BuyTicket extends Controller
         $all_empty_seats = $Ticket-> empty_seats;
 
 
-        // $seats = unserialize($seats);
         
-        // $all_empty_seats = unserialize($all_empty_seats);
-        // // dd($req -> all(), $all_empty_seats);
-        // for ($i = 0; $i < count($seats); $i++) {
-        //     $all_empty_seats[$seats[$i]] = True;         
-            
-        // }
-        // dd($req -> all(), $all_empty_seats);
 
         if ($Ticket) {
             
            
         
             
-            // $all_empty_seats = serialize($all_empty_seats);
-        
-            
-            // $Ticket->update(['empty_seats' => $all_empty_seats]);//
             $Ticket->updateEmptySeats($seats, $all_empty_seats);
             
         } else {
@@ -204,7 +185,44 @@ class BuyTicket extends Controller
         
         // Call the model to delete the ticket
         CustomerBuyTicket::change_cancel_request_to_true($cancel_request_ticket_id);
-        // dd($req -> all());
-        return Redirect::back();
+        
+        
+
+        //-------------------------------------------------------------------------------------------------------------
+        // to return back to cart again
+        $userId = Auth::id();
+        
+        //Fetch cart items for the authenticated logged in  user
+        
+        $cartItems = CartItem::fetch_cart_items($userId);
+
+        //Empty array initialization to store the cart items details and info
+        $detailedCartItems = [];
+
+        //Looping through each cart item and fetching the associated shopping item info 
+        foreach ($cartItems as $cartItem) {
+            $shoppingItem = $cartItem->shoppingItem;
+
+            //Array creation with the cart item info
+            $detailedCartItem = [
+                'name' => $shoppingItem->name,
+                'price' => $shoppingItem->price,
+                'quantity' => $cartItem->quantity,
+                'total' => $shoppingItem->price * $cartItem->quantity,
+            ];
+
+            //Add the detailed cart item to the array
+            $detailedCartItems[] = $detailedCartItem; //is it redundent?
+        }
+
+        // ticket details
+        
+        $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
+        
+        // ticket details ends
+        
+
+        //Pass the detailed cart items to the cart view
+        return view('shopping-items.cart', compact('detailedCartItems','tickets'));
     }
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 
 <head>
-    <!-- Meta tags and other head elements -->
+    
 </head>
 
 <body class="bg-theme bg-theme3">
@@ -72,8 +72,8 @@
                             <div class="service-card">
                             <style>
                                 .service-icon img {
-                                    width: 45%; /* Adjust the percentage to resize the image */
-                                    height: auto; /* Maintain aspect ratio */
+                                    width: 45%; 
+                                    height: auto; 
                                 }
                             </style>
 

@@ -14,18 +14,14 @@ class ShoppingItemController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request -> all());
+        
         // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton
         $ticket_id = $request-> ticket_id;
         $bus_comp_name = $request-> bus_comp_name;
         $bus_comp_id = $request-> bus_comp_id;
         // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton ends
         $shoppingItems = ShoppingItem::fetchingShoppingItem($ticket_id);
-        // $shoppingItems = ShoppingItem::where('ticket_id', $ticket_id)->get();
-        // $shoppingItems = ShoppingItem::fetchingShopingItem($ticket_id);
         
-
-        // dd($request -> all(), $shoppingItems);
         return view('shopping-items.index', compact('shoppingItems'));
     }
 
@@ -34,10 +30,10 @@ class ShoppingItemController extends Controller
     public function addToCart(Request $request)
     {
         $author_id = Auth::user()->id;
-        // dd($request -> all());
+        
         //Get the quantities from the form input
         $quantities = $request->input('item_quantity');
-        // dd($request -> all(),$quantities);
+        
         //Loop through each quantity and update the cart items accordingly
         foreach ($quantities as $itemId => $quantity) {
             //Check if the quantity is greater than 0 to avoid adding items with zero quantity
@@ -46,9 +42,6 @@ class ShoppingItemController extends Controller
                 //Find the cart item for the current food item and user
 
                 // changed for mvc pattern
-                // $cartItem = CartItem::where('user_id', $author_id)
-                //     ->where('shopping_item_id', $itemId)
-                //     ->first();
                 
                 $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId);
                 
@@ -79,14 +72,13 @@ class ShoppingItemController extends Controller
             }
         }
         
-        // return redirect()->back()->with('success', 'Cart updated successfully.');
         
         //-------------------------------------------------------------------------------------------------------------
         // to return back to cart again
         $userId = Auth::id();
         
         //Fetch cart items for the authenticated logged in  user
-        // $cartItems = CartItem::where('user_id', $userId)->get(); changed for mvc pattern
+        
         $cartItems = CartItem::fetch_cart_items($userId);
 
         //Empty array initialization to store the cart items details and info
@@ -109,7 +101,7 @@ class ShoppingItemController extends Controller
         }
 
         // ticket details
-        // $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        
         $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
         
         // ticket details ends

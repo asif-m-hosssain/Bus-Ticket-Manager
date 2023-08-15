@@ -1,4 +1,4 @@
-@extends('layouts.app') <!-- If you have a master layout, use it. Otherwise, create a basic layout for the admin views -->
+@extends('layouts.app') 
 
 @section('content')
 

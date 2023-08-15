@@ -5,8 +5,7 @@
 <html lang="en">
 
 <head>
-    <!-- Add your meta tags, stylesheets, and other head content here -->
-    <!-- Add animate.css library for animations -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="utf-8" />
@@ -15,7 +14,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Company Profile</title>
-    <!-- loader-->
+    
 
     <script src="js/modernizr-2.6.2.min.js"></script>
 </head>
@@ -99,11 +98,11 @@
         </div>
     </div>
 
-    <!-- ... (Your existing overlay, back to top button, and closing tags) ... -->
+    
 
     <!-- Additional styles -->
     <style>
-        /* ... (Your existing styles) ... */
+    
 
         /* Animation styles */
         .welcome-animation {

@@ -57,20 +57,15 @@ class admin_controller extends Controller
 
     public function profile_update(Request $req)
     {
-        // print_r($req->input());
-        // dd($req -> all(),"doesit work?");
+        
         $author_id = Auth::user()->id;
         $authod_name = Auth::user()->name;
         $data = new User;
-        // $data->b_comp_ticket_author_id = $author_id;
+        
         $data = User::where("name", $authod_name)->first();
-        // dd($data,"doesit work?");
+        
         $data -> name = $req-> name;
-        // dd($req -> all(),"doesit work?");
-        // $data -> id = Auth::user()->id+3;
-        // $data -> email = Auth::user()->email;
-        // $data -> password = Auth::user()->password;
-       
+        
         
         $data -> save();
         return redirect()->back();

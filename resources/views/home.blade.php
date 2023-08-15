@@ -5,8 +5,7 @@
 <html lang="en">
 
 <head>
-    <!-- Add your meta tags, stylesheets, and other head content here -->
-    <!-- Add animate.css library for animations -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -42,15 +41,7 @@
         <div class="content-wrapper">
             <div class="container-fluid">
 
-                <!-- Welcome card with animation -->
-                <div class="card">
-                    <!-- ... (Your existing card content) ... -->
-                </div>
-
-                <!-- Search and results section -->
-                <div class="container">
-                    <!-- ... (Your existing search section) ... -->
-                </div>
+                
 
                 <!-- Informational content in a single row -->
                 <div class="row mt-5 align-items-center text-center">
@@ -98,12 +89,11 @@
         </div>
     </div>
 
-    <!-- ... (Your existing overlay, back to top button, and closing tags) ... -->
+    
 
     <!-- Additional styles -->
     <style>
-        /* ... (Your existing styles) ... */
-
+        
         /* Animation styles */
         .animate__animated {
             animation-duration: 1s;

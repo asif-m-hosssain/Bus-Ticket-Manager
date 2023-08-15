@@ -1,5 +1,5 @@
 <?php
-//mvc done   
+ 
 
 namespace App\Http\Controllers;
 
@@ -32,19 +32,12 @@ class AddShoppingItemController extends Controller
 
     public function addToMenu(request $req)
     {
-        // dd($req -> all(),"doesit work?");
+        
         
         $author_id = Auth::user()->id;
         $author_name = Auth::user()->name;
         
-        // $data = new ShoppingItem;
-        // $data -> name = $req->input("item_name");
-        // $data -> price = $req->input("item_Price");
-        // $data -> ticket_id = $req -> ticket_id;
-        // $data -> bus_comp_id = $author_id;
-        // $data -> bus_comp_name = $author_name;
-
-        // $data -> save();
+        
         $data = ShoppingItem::create([
             'name' => $req->input('item_name'),
             'price' => $req->input('item_Price'),
@@ -53,11 +46,6 @@ class AddShoppingItemController extends Controller
             'bus_comp_name' => $author_name,
         ]);
         return redirect()->back();
-        // $user = Auth::user();
-    
-        // // Attach the shopping item to the user's cart with quantity 1
-        // $user->cartItems()->attach($shoppingItem, ['quantity' => 1]);
-
-        // return redirect()->back()->with('success', 'Item added to cart successfully.');
+        
     }
 }

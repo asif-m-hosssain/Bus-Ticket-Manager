@@ -70,9 +70,7 @@
                             </tbody>
                             
                         </table>
-                        <!-- <div class="form-group">
-                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
-                        </div> -->
+                        
                     </div>
                 </form>
 

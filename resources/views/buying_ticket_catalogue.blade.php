@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
+    <title>Tickets Catalogue</title>
     <!-- loader-->
    
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -52,7 +52,7 @@
                                     <label for="from">
                                         <H6>From:</H6>
                                     </label>
-                                    <!-- <input type="text" class="form-control" id="from-place" placeholder="Dhaka, Bangladesh"/> -->
+                                    
                                     <select required class="form-control form-control-rounded" name="Start_RouteName" id="input-6" placeholder="select">>
                                         @foreach($allRoutes as $item)
                                         <option onkeyup="saveValue(this);" value="{{ $item->route_name }}"> {{ $item->route_name }} </option>
@@ -74,14 +74,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <!-- <div class="col-xxs-12 col-xs-6 mt">
-                                <div class="input-field">
-                                    <label for="quantity">
-                                        <H6>Seats:</H6>
-                                    </label>
-                                    <input name="No_Seats" type="number" class="form-control rounded-0" placeholder="Seats" required="" min="0" max="41" step="1" pattern="\d*">
-                                </div>
-                            </div> -->
+                           
                             <hr>
                             <div class="col-xxs-12 col-xs-6 mt">
                                 <div class="input-field">
@@ -146,9 +139,7 @@
                             </tbody>
                             
                         </table>
-                        <!-- <div class="form-group">
-                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
-                        </div> -->
+                        
                     </div>
                 </form>
 

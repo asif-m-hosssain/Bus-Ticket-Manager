@@ -10,8 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashtreme Admin - Free Dashboard for Bootstrap 4 by Codervent</title>
-    <!-- loader-->
+    <title>Rating</title>
+    
    
     <script src="js/modernizr-2.6.2.min.js"></script>
 </head>
@@ -125,20 +125,13 @@
                                         <td>{{ $item->updated_at }}</td>
                                        
                                         
-                                        <!-- <td>
-                                        <div class="form-group">
-                                                <button onclick="saveValue(this);" name="comp_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Ratings</button>
-                                        </div>
-                                            
-                                        </td> -->
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
                             
                         </table>
-                        <!-- <div class="form-group">
-                                <button type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Submit-Ticket</button>
-                        </div> -->
+                        
                     </div>
                 </form>
 

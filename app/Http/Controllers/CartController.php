@@ -24,7 +24,7 @@ class CartController extends Controller
         $userId = Auth::id();
         
         //Fetch cart items for the authenticated logged in  user
-        // $cartItems = CartItem::where('user_id', $userId)->get(); changed for mvc pattern
+        
         $cartItems = CartItem::fetch_cart_items($userId);
 
         //Empty array initialization to store the cart items details and info
@@ -43,13 +43,13 @@ class CartController extends Controller
             ];
 
             //Add the detailed cart item to the array
-            $detailedCartItems[] = $detailedCartItem; //is it redundent?
+            $detailedCartItems[] = $detailedCartItem; 
         }
 
         // ticket details
-        // $tickets = CustomerBuyTicket::where('customer_id', $userId)->get();
+        
         $tickets = CustomerBuyTicket::getCustomerTicketsByID($userId);
-        // dd($tickets);
+        
         // ticket details ends
         
 

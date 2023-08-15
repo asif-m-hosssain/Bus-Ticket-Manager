@@ -52,10 +52,10 @@ class ShoppingItemController extends Controller
                 
                 $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId);
                 
-                // getting date
+                // getting jounrney time and date
                 $Ticket = Brand_Ticket_Published::getTicketsbyID($request->input('ticket_id'));
-        
                 $b_comp_ticket_date = $Ticket->b_comp_ticket_date;
+                // getting jounrney time and date ends 
 
                 //If a cart item exists, update the quantity
                 if ($cartItem) {
@@ -66,7 +66,7 @@ class ShoppingItemController extends Controller
                     $cartItem = new CartItem();
                     $cartItem->user_id = $author_id;
                     $cartItem->shopping_item_id = $itemId;
-                    // $cartItem->shopping_item_id = $itemId;
+                    // saving tickeid, bus comapny id, bus company name and jounrney date to same database
                     $cartItem->ticket_id = $request->input('ticket_id');
                     $cartItem->bus_comp_id = $request->input('bus_comp_id');
                     $cartItem->bus_comp_name = $request->input('bus_comp_name');

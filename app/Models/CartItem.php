@@ -17,7 +17,7 @@ class CartItem extends Model
 
     public static function fetch_cart_items($userId)
     {
-        return self::where('b_comp_ticket_date','>',Carbon::now())
+        return self::where('b_comp_ticket_date','>',Carbon::now()) //to fetch item that is active in time
             ->where('user_id', $userId)
             ->get();
             

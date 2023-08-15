@@ -66,24 +66,32 @@ Route::POST('pass_update','App\Http\Controllers\profile_Controller@update_passwo
 use App\Http\Controllers\ShoppingItemController;
 use App\Http\Controllers\CartController;
 
-Route::middleware('auth')->group(function () {
-    Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
-    Route::post('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index_post');//pranta
+// Route::middleware('auth')->group(function () {
+//     Route::get('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index');
+//     Route::post('/shopping-items', [ShoppingItemController::class, 'index'])->name('shopping-items.index_post');//pranta
     
-    Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
-    Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
+//     Route::post('/addToCart', [ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
+//     Route::get('/shopping-cart', [CartController::class, 'cart'])->name('shopping-items.cart');
 
-
-    
-
-
-    // Route::get('/customersearch', [App\Http\Controllers\HomeController::class, 'customersearch'])->name('customersearch'); //parom
-    // Route::post('/bookticket', [App\Http\Controllers\HomeController::class, 'bookTicket'])->name('bookticket'); //parom
-    Route::POST('/brand-register', [App\Http\Controllers\BController::class, 'store'])->name('brand_register')->middleware('auth'); //parom
 
     
 
-});
+
+//     // Route::get('/customersearch', [App\Http\Controllers\HomeController::class, 'customersearch'])->name('customersearch'); //parom
+//     // Route::post('/bookticket', [App\Http\Controllers\HomeController::class, 'bookTicket'])->name('bookticket'); //parom
+//     Route::POST('/brand-register', [App\Http\Controllers\BController::class, 'store'])->name('brand_register')->middleware('auth'); //parom
+
+    
+
+// });
+Route::get('/shopping-items', [App\Http\Controllers\ShoppingItemController::class, 'index'])->name('shopping-items.index');
+Route::post('/shopping-items', [App\Http\Controllers\ShoppingItemController::class, 'index'])->name('shopping-items.index_post');
+Route::post('/addToCart', [App\Http\Controllers\ShoppingItemController::class, 'addToCart'])->name('shopping-items.addToCart');
+Route::get('/shopping-cart', [App\Http\Controllers\CartController::class, 'cart'])->name('shopping-items.cart');
+
+// Brand Register Route
+Route::POST('/brand-register', [App\Http\Controllers\BController::class, 'store'])->name('brand_register');
+
 
 
 //adding items to menu
@@ -115,3 +123,12 @@ Route::post('cancel_request', [App\Http\Controllers\BuyTicket::class, 'cancel_re
 // Route::post('cancel_request', 'App\Http\Controllers\BuyTicket@cancel_request');//pranta
 
 Route::post('/cancel_sold_tickets', [bus_comp_Controller::class, 'cancel_tickets'])->name('------');//to cancel sold tickets
+
+
+
+
+//ticket print
+use App\Http\Controllers\PrintableTicketController;
+Route::get('/printable-ticket', [PrintableTicketController::class, 'index'])->name('printable-ticket');
+
+

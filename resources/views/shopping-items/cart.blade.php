@@ -135,4 +135,14 @@
             PAYMENT
         </a>
     </div>
+
+    <!-- Print button -->
+    <div class="d-flex justify-content-center mt-4">
+        <a href="{{ route('printable-ticket', ['tickets' => base64_encode(serialize($tickets)), 'detailedCartItems' => base64_encode(serialize($detailedCartItems))]) }}" class="btn btn-outline-success">
+            GET Printed copy
+        </a>
+    </div>
+    <hr>
+    <h6 class="text-center">Show the printed copy to the bus counter and pay by cash </h6>
+   
 @endsection

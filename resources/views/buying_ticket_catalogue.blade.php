@@ -39,6 +39,7 @@
         <div class="content-wrapper">
             <div class="container-fluid">
                 <!-- search bar -->
+                <!-- user specific info fed-->
                 <form action="buy_ticket" method="POST">
                     @csrf
                     <div class="card">
@@ -52,7 +53,7 @@
                                     <label for="from">
                                         <H6>From:</H6>
                                     </label>
-                                    
+                                     <!-- drop down destination options "From" -->
                                     <select required class="form-control form-control-rounded" name="Start_RouteName" id="input-6" placeholder="select">>
                                         @foreach($allRoutes as $item)
                                         <option onkeyup="saveValue(this);" value="{{ $item->route_name }}"> {{ $item->route_name }} </option>
@@ -66,6 +67,7 @@
                                     <label for="from">
                                         <H6>To:</H6>
                                     </label>
+                                    <!-- drop down destination options "To" -->
                                     <select required class="form-control form-control-rounded" name="Destination_RouteName" id="input-6" placeholder="select">>
                                         @foreach($allRoutes as $item)
                                         <option onkeyup="saveValue(this);" value="{{ $item->route_name }}"> {{ $item->route_name }} </option>
@@ -81,6 +83,7 @@
                                     <label for="quantity">
                                         <H6>Time:</H6>
                                     </label>
+                                     <!-- Choose Time -->
                                     <input class="form-control rounded-0" type="datetime-local" id="starttime" name="Start_Time" onfocus="(this.type='datetime-local')" onblur="(this.type='datetime-local')">
                                 </div>
                             </div>
@@ -128,7 +131,7 @@
                                         <td> {{ $item->b_comp_ticket_price}} </td>
                                         <td> {{ $item->created_at   }} </td>
                                         
-                                        <td>
+                                        <td> <!-- Buy ticekt button -->
                                         <div class="form-group">
                                                 <button onclick="saveValue(this);" name="ticket_id" value="{{ $item->id }}" type="submit" class="btn btn-outline-secondary"><i class="icon-lock"></i>Buy</button>
                                         </div>

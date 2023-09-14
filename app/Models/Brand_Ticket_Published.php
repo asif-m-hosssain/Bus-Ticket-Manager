@@ -70,11 +70,11 @@ class Brand_Ticket_Published extends Model
         
         self::where('id', $ticketId)->delete();
     }
-
+    //Geting tickets
     public static function getAlltickets()
     {   
         
-        return self::where('b_comp_ticket_date','>',Carbon::now())
+        return self::where('b_comp_ticket_date','>',Carbon::now())//comparing the date with current date
             ->where('b_comp_ticket_seat','>',0)
             ->get();
 

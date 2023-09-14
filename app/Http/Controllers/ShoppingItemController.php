@@ -14,15 +14,15 @@ class ShoppingItemController extends Controller
 {
     public function index(Request $request)
     {
-        
+        //dd($request->all());
         // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton
         $ticket_id = $request-> ticket_id;
         $bus_comp_name = $request-> bus_comp_name;
         $bus_comp_id = $request-> bus_comp_id;
         // fetching data ticket_id,bus_comp_name, bus_comp_id after clicking the buttton ends
-        $shoppingItems = ShoppingItem::fetchingShoppingItem($ticket_id);
+        $shoppingItems = ShoppingItem::fetchingShoppingItem($ticket_id);// custom model::function
         
-        return view('shopping-items.index', compact('shoppingItems'));
+        return view('shopping-items.index', compact('shoppingItems'));// return view file with the fetched shopping items
     }
 
     // Add to cart function:
@@ -42,11 +42,11 @@ class ShoppingItemController extends Controller
                 //Find the cart item for the current food item and user
 
                 // changed for mvc pattern
-                
-                $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId);
+                //fetching active foods in the menu
+                $cartItem = CartItem::getCartItemForCurrentFoodItemAndUser($author_id,$itemId); //custom model::function
                 
                 // getting jounrney time and date
-                $Ticket = Brand_Ticket_Published::getTicketsbyID($request->input('ticket_id'));
+                $Ticket = Brand_Ticket_Published::getTicketsbyID($request->input('ticket_id')); //custom model::function
                 $b_comp_ticket_date = $Ticket->b_comp_ticket_date;
                 // getting jounrney time and date ends 
 
@@ -56,10 +56,10 @@ class ShoppingItemController extends Controller
                     $cartItem->save();
                 } else {
                     //If a cart item doesn't exist, creating a new one
-                    $cartItem = new CartItem();
+                    $cartItem = new CartItem(); //instance created from cart item
                     $cartItem->user_id = $author_id;
                     $cartItem->shopping_item_id = $itemId;
-                    // saving tickeid, bus comapny id, bus company name and jounrney date to same database
+                    // saving tickeid, bus comapny id, bus company name and jounrney date to same database, inputs are stored as variable above
                     $cartItem->ticket_id = $request->input('ticket_id');
                     $cartItem->bus_comp_id = $request->input('bus_comp_id');
                     $cartItem->bus_comp_name = $request->input('bus_comp_name');

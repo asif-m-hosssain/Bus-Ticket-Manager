@@ -21,24 +21,24 @@ use App\Models\CartItem;
 
 class BuyTicket extends Controller
 {
-    public function showTickets(Request $req)
+    public function showTickets(Request $req) // fetching the required user creds and routes upon request
     {   
 
         $author_id = Auth::user()->id;
         $author_name = Auth::user()->name;
-        $allRoutes = bus_routes::all();
+        $allRoutes = bus_routes::all(); //custom model::function 
         
-        $tickets = Brand_Ticket_Published::getAlltickets();
+        $tickets = Brand_Ticket_Published::getAlltickets(); //custom model::function 
         
 
         
-        if($req){
+        if($req){ // fetching route info
 
             $from = $req-> Start_RouteName;
             $to = $req-> Destination_RouteName;
             $date = $req-> Start_Time;
             
-            $tickets = Brand_Ticket_Published::getRequiredTickets($from,$to);
+            $tickets = Brand_Ticket_Published::getRequiredTickets($from,$to); //custom model::function
         }else{
             
         }
@@ -47,7 +47,7 @@ class BuyTicket extends Controller
         
         
         if($userType=='Customer' || $userType == 'Admin'){
-            return view('buying_ticket_catalogue',compact('allRoutes','tickets'));
+            return view('buying_ticket_catalogue',compact('allRoutes','tickets')); //returning view file with ('allRoutes','tickets')
         }
         else{
              

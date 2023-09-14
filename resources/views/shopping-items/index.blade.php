@@ -8,7 +8,7 @@
 
     </style>
 @endsection
-
+<!-- shoppinh item view file -->
 @section('content')
 <script src="js/modernizr-2.6.2.min.js"></script>
     <h1 class="text-center">FOOD CHART</h1>
